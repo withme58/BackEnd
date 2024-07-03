@@ -48,4 +48,13 @@ public class UserBusiness {
         var tokenResponse = tokenBusiness.issueToken(userEntity);
         return tokenResponse;
     }
+
+    //userid -> service 에서 정보 가져와
+    // entity - > response 변환
+    public UserResponse me(Long userId) {
+
+        var entity = userService.getUserWithThrow(userId);
+        var response = userConverter.toUserResponse(entity);
+        return response;
+    }
 }
