@@ -5,8 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import toy.withMe58.api.interceptor.AuthorizationInterceptor;
-import toy.withMe58.api.resolver.UserSessionResolver;
+import toy.withme58.api.common.error.ErrorCodeIfs;
+import toy.withme58.api.interceptor.AuthorizationInterceptor;
+import toy.withme58.api.resolver.UserSessionResolver;
 
 import java.util.List;
 

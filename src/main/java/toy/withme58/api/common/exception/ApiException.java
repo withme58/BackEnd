@@ -1,7 +1,7 @@
 package toy.withme58.api.common.exception;
 
 import lombok.Getter;
-import toy.withMe58.api.common.error.ErrorCodeIfs;
+import toy.withme58.api.common.error.ErrorCodeIfs;
 
 @Getter
 public class ApiException extends RuntimeException implements ApiExceptionIfs{

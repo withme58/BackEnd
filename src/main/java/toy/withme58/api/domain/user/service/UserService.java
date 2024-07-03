@@ -1,12 +1,13 @@
 package toy.withme58.api.domain.user.service;
 
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import toy.withMe58.api.common.error.ErrorCode;
-import toy.withMe58.api.common.error.UserErrorCode;
-import toy.withMe58.api.common.exception.ApiException;
-import toy.withMe58.db.user.UserEntity;
-import toy.withMe58.db.user.UserRepository;
+import toy.withme58.api.common.error.ErrorCode;
+import toy.withme58.api.common.error.UserErrorCode;
+import toy.withme58.api.common.exception.ApiException;
+import toy.withme58.db.user.UserEntity;
+import toy.withme58.db.user.UserRepository;
 
 import java.util.Optional;
 

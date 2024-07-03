@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import toy.withMe58.api.common.api.Api;
-import toy.withMe58.api.domain.user.business.UserBusiness;
-import toy.withMe58.api.domain.user.controller.model.UserLoginRequest;
-import toy.withMe58.api.domain.user.controller.model.UserRegisterRequest;
-import toy.withMe58.api.domain.user.controller.model.UserResponse;
+import toy.withme58.api.common.api.Api;
+import toy.withme58.api.domain.user.business.UserBusiness;
+import toy.withme58.api.domain.user.controller.model.UserLoginRequest;
+
+import toy.withme58.api.domain.user.controller.model.UserRegisterRequest;
+import toy.withme58.api.domain.user.controller.model.UserResponse;
 
 @RequiredArgsConstructor
 @RestController
@@ -26,7 +27,7 @@ public class UserOpenApiController {
             @Valid
             @RequestBody UserRegisterRequest userRegisterRequest
 
-    ) {
+            ) {
         var response = userBusiness.register(userRegisterRequest);
 
         return Api.OK(response);

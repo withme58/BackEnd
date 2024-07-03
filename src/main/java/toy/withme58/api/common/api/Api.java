@@ -3,7 +3,7 @@ package toy.withme58.api.common.api;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import toy.withMe58.api.common.error.ErrorCodeIfs;
+import toy.withme58.api.common.error.ErrorCodeIfs;
 
 @Data
 @AllArgsConstructor

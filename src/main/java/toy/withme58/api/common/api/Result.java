@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import toy.withMe58.api.common.error.ErrorCodeIfs;
+import toy.withme58.api.common.error.ErrorCodeIfs;
 
 @Data
 @AllArgsConstructor
