@@ -2,7 +2,7 @@
 
 ---
 
-🍀 withme 팀 백엔드입니다.
+🍀 <나랑 걸을사람? 선착순 58명> 팀 백엔드입니다.
 
 # 📖 Project Name & Description
 
