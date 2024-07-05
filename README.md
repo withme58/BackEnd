@@ -74,13 +74,3 @@
 ## ☕️ Pull Request Convention
 
 ✅ 제목 : [작업 키워드] 작업내용 (ex : [feat] Docker 기반 CI/CD구축)
-
-# 🔧 Structure
-
----
-
-🌱 empty
-
-```bash
-
-```
