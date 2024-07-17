@@ -45,12 +45,12 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             throw new ApiException(TokenErrorCode.AUTHORIZATION_TOKEN_NOT_FOUND);
         }
 
-        var userId = tokenBusiness.validationToken(accessToken);
+        var memberId = tokenBusiness.validationToken(accessToken);
 
-        if(userId!=null){
+        if(memberId!=null){
 
             var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
-            requestContext.setAttribute("userId",userId, RequestAttributes.SCOPE_REQUEST);
+            requestContext.setAttribute("memberId",memberId, RequestAttributes.SCOPE_REQUEST);
             return true;
         }
 

@@ -7,7 +7,7 @@ import toy.withme58.api.common.exception.ApiException;
 import toy.withme58.api.domain.token.controller.model.TokenResponse;
 import toy.withme58.api.domain.token.converter.TokenConverter;
 import toy.withme58.api.domain.token.service.TokenService;
-import toy.withme58.db.user.UserEntity;
+import toy.withme58.db.member.MemberEntity;
 
 
 import java.util.Optional;
@@ -19,9 +19,9 @@ public class TokenBusiness {
     private final TokenConverter tokenConverter;
     private final TokenService tokenService;
 
-    public TokenResponse issueToken(UserEntity userEntity){
+    public TokenResponse issueToken(MemberEntity memberEntity){
 
-        return Optional.ofNullable(userEntity)
+        return Optional.ofNullable(memberEntity)
                 .map(ue->{
                     return ue.getId();
                 })

@@ -10,22 +10,22 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import toy.withme58.api.common.annotation.UserSession;
-import toy.withme58.api.domain.user.model.User;
-import toy.withme58.api.domain.user.service.UserService;
+import toy.withme58.api.common.annotation.MemberSession;
+import toy.withme58.api.domain.member.model.Member;
+import toy.withme58.api.domain.member.service.MemberService;
 
 @RequiredArgsConstructor
 @Component
-public class UserSessionResolver implements HandlerMethodArgumentResolver {
+public class MemberSessionResolver implements HandlerMethodArgumentResolver {
 
-    private final UserService userService;
+    private final MemberService memberService;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
 
-        var annotation =parameter.hasParameterAnnotation(UserSession.class);
+        var annotation =parameter.hasParameterAnnotation(MemberSession.class);
 
-        var parmeterType = parameter.getParameterType().equals(User.class);
+        var parmeterType = parameter.getParameterType().equals(Member.class);
 
         return (annotation && parmeterType);
 
@@ -36,15 +36,17 @@ public class UserSessionResolver implements HandlerMethodArgumentResolver {
 
         var requestContext = RequestContextHolder.getRequestAttributes();
 
-        var userId = requestContext.getAttribute("userId", RequestAttributes.SCOPE_REQUEST);
+        var memberId = requestContext.getAttribute("memberId", RequestAttributes.SCOPE_REQUEST);
 
-        var userEntity = userService.getUserWithThrow(Long.parseLong(userId.toString()));
+        var memberEntity = memberService.getMemberWithThrow(Long.parseLong(memberId.toString()));
 
-        return User.builder()
-                .id(userEntity.getId())
-                .email(userEntity.getEmail())
-                .password(userEntity.getPassword())
-                .nickName(userEntity.getNickName())
+        return Member.builder()
+                .id(memberEntity.getId())
+                .email(memberEntity.getEmail())
+                .password(memberEntity.getPassword())
+                .name(memberEntity.getName())
+                .createdAt(memberEntity.getCreatedAt())
+                .status(memberEntity.getStatus())
                 .build();
     }
 }
