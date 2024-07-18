@@ -13,7 +13,7 @@ import toy.withme58.api.domain.member.model.MemberResponse;
 import toy.withme58.api.domain.member.model.Member;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/member")
 @RequiredArgsConstructor
 //로그인 된 사용자가 들어오는 곳
 public class MemberApiController {
