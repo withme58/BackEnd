@@ -1,22 +1,21 @@
-package toy.withme58.api.config.web;
+package toy.withme58.api.config.website;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import toy.withme58.api.common.error.ErrorCodeIfs;
 import toy.withme58.api.interceptor.AuthorizationInterceptor;
-import toy.withme58.api.resolver.UserSessionResolver;
+import toy.withme58.api.resolver.MemberSessionResolver;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @Configuration
-public class WebConfig implements WebMvcConfigurer {
+public class WebSiteConfig implements WebMvcConfigurer {
 
     private final AuthorizationInterceptor authorizationInterceptor;
-    private final UserSessionResolver userSessionResolver;
+    private final MemberSessionResolver memberSessionResolver;
 
 
     private List<String> OPEN_API = List.of(
@@ -45,6 +44,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(userSessionResolver);
+        resolvers.add(memberSessionResolver);
     }
 }

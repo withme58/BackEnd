@@ -5,9 +5,11 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum UserErrorCode implements ErrorCodeIfs{
+public enum MemberErrorCode implements ErrorCodeIfs{
 
-    USER_NOT_FOUND(200,200,"사용자를 찾을 수 없음"),
+    Member_Not_Found(200,200,"사용자를 찾을 수 없음"),
+    Member_Name_Duplicate(200,200,"해당 닉네임은 중복"),
+    Member_Email_Duplicate(200,200,"해당 이메일은 존재"),
     ;
 
 

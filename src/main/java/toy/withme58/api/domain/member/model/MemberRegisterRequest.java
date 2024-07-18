@@ -1,4 +1,4 @@
-package toy.withme58.api.domain.user.controller.model;
+package toy.withme58.api.domain.member.model;
 
 
 import jakarta.validation.constraints.Email;
@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRegisterRequest {
+public class MemberRegisterRequest {
 
     @NotBlank
-    private String nickName;
+    private String name;
 
     @NotBlank
     @Email

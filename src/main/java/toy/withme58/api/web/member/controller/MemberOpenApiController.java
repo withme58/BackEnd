@@ -1,4 +1,4 @@
-package toy.withme58.api.domain.user.controller;
+package toy.withme58.api.web.member.controller;
 
 
 import jakarta.validation.Valid;
@@ -8,27 +8,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import toy.withme58.api.common.api.Api;
-import toy.withme58.api.domain.user.business.UserBusiness;
-import toy.withme58.api.domain.user.controller.model.UserLoginRequest;
+import toy.withme58.api.domain.member.business.MemberBusiness;
+import toy.withme58.api.domain.member.model.MemberLoginRequest;
 
-import toy.withme58.api.domain.user.controller.model.UserRegisterRequest;
-import toy.withme58.api.domain.user.controller.model.UserResponse;
+import toy.withme58.api.domain.member.model.MemberRegisterRequest;
+import toy.withme58.api.domain.member.model.MemberResponse;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/open-api/user")
-public class UserOpenApiController {
+public class MemberOpenApiController {
 
-    private final UserBusiness userBusiness;
+    private final MemberBusiness memberBusiness;
 
 
     @PostMapping("/register")
-    public Api<UserResponse> register(
+    public Api<MemberResponse> register(
             @Valid
-            @RequestBody UserRegisterRequest userRegisterRequest
+            @RequestBody MemberRegisterRequest memberRegisterRequest
 
             ) {
-        var response = userBusiness.register(userRegisterRequest);
+        var response = memberBusiness.register(memberRegisterRequest);
 
         return Api.OK(response);
     }
@@ -36,9 +36,9 @@ public class UserOpenApiController {
     @PostMapping("/login")
     public Api<Object> login(
             @Valid
-            @RequestBody UserLoginRequest userLoginRequest
+            @RequestBody MemberLoginRequest memberLoginRequest
     ) {
-        var response = userBusiness.login(userLoginRequest);
+        var response = memberBusiness.login(memberLoginRequest);
         //Todo 반드시 함수 반환값 다시 점검
         return Api.OK(response);
 
