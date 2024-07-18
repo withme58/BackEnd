@@ -114,11 +114,7 @@ application.yaml
 # Ignore OS-specific files
 Thumbs.db
 
-
 # Ignore build output directories
 target/
-
-# Ignore build.gradle file
-build.gradle
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,java
