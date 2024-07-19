@@ -20,7 +20,13 @@ public class QuestionEntity {
     @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
+    private String colorCode;
+
     @Column(columnDefinition = "varchar(50)", nullable = false)
     @Enumerated(EnumType.STRING)
     private QuestionStatus status;
+
+//    @OneToMany(mappedBy = "member")
+//    private List<MemberFriendEntity> memberFriendList = List.of();
 }
