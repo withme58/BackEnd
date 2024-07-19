@@ -1,8 +1,10 @@
 package toy.withme58.db.question;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Table(name = "question")
+@NoArgsConstructor
 @Entity
 public class QuestionEntity {
 
@@ -12,4 +14,6 @@ public class QuestionEntity {
 
     @Column(nullable = false)
     private String question;
+
+
 }
