@@ -23,7 +23,6 @@ public class MemberService {
         return Optional.ofNullable(memberEntity)
                 .map(it->{
 
-
                     it.setCreatedAt(LocalDateTime.now());
                     it.setStatus(MemberStatus.REGISTERED);
                 return memberRepository.save(it);
