@@ -1,7 +1,6 @@
-package toy.withme58.api.qustion;
+package toy.withme58.db.question;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import toy.withme58.db.question.QuestionEntity;
 
 import java.util.List;
 
