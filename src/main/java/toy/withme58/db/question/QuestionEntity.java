@@ -4,7 +4,11 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import toy.withme58.db.memberfriend.MemberFriendEntity;
+import toy.withme58.db.memberquestion.MemberQuestionEntity;
 import toy.withme58.db.question.enums.QuestionStatus;
+
+import java.util.List;
 
 @Table(name = "question")
 @NoArgsConstructor
@@ -27,6 +31,6 @@ public class QuestionEntity {
     @Enumerated(EnumType.STRING)
     private QuestionStatus status;
 
-//    @OneToMany(mappedBy = "member")
-//    private List<MemberFriendEntity> memberFriendList = List.of();
+    @OneToMany(mappedBy = "question")
+    private List<MemberQuestionEntity> memberQuestionList = List.of();
 }

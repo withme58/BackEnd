@@ -1,23 +1,23 @@
-package toy.withme58.db.member;
+package toy.withme58.db.friend;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
-import toy.withme58.db.member.enums.MemberStatus;
+import toy.withme58.db.friend.enums.FriendStatus;
 import toy.withme58.db.memberfriend.MemberFriendEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name ="member")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberEntity {
+@Entity
+@Table(name = "friend")
+public class FriendEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,20 +27,14 @@ public class MemberEntity {
     @Email
     private String email;
 
-    @Column(length =50, nullable =false)
-    private String password;
 
     @Column(length =50, nullable =false)
     private String name;
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-
     @Column(columnDefinition = "varchar(50)", nullable = false)
     @Enumerated(EnumType.STRING)
-    private MemberStatus status;
+    private FriendStatus status;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "friend")
     private List<MemberFriendEntity> memberFriendList = List.of();
-
 }
