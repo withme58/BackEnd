@@ -2,15 +2,15 @@
 
 ---
 
-🍀 <나랑 걸을사람? 선착순 58명> 팀 백엔드입니다.
+🍀 <요놈바라?> 팀 백엔드입니다.
 
 # 📖 Project Name & Description
 
 ---
 
-📛 Name : withme58
+📛 Name : peephole
 
-📛️ Description : 서로의 시간을 예약한다
+📛️ Description : 동기부여를 받자!
 
 # ⌨️ Development Information
 
@@ -61,11 +61,10 @@
 |----------|-----------|
 | feat     | 기능개발      |
 | refactor | 코드 개선     |
-| chore    | 기타 사소한 수정 |
 | fix      | 버그 수정 관련  |
-| setting  | 세팅 관련     |
 | test     | 테스트 관련    |
 | modify   | 코드 수정이 생길 경우 |
+| hotfix   | 큰일! |
 
 ```bash
 [type] : content
