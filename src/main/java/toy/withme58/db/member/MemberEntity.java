@@ -43,4 +43,11 @@ public class MemberEntity {
     @OneToMany(mappedBy = "member")
     private List<MemberFriendEntity> memberFriendList = List.of();
 
+    public MemberEntity(String email, String password, String name, LocalDateTime createdAt, MemberStatus status) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.createdAt = createdAt;
+        this.status = status;
+    }
 }
