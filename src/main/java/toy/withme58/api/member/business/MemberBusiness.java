@@ -24,7 +24,7 @@ public class MemberBusiness {
 
     private final TokenBusiness tokenBusiness;
 
-    private final FriendBusiness friendBusiness;
+   private final FriendBusiness friendBusiness;
 
 
     /*
@@ -39,10 +39,11 @@ public class MemberBusiness {
 
         var entity = memberConverter.toMemberEntity(memberRegisterRequest);
 
-        var userEntity = memberService.register(entity);
+        var memberEntity = memberService.register(entity);
+        friendBusiness.registerFriend(memberEntity);
 
 
-        var response = memberConverter.toMemberResponse(userEntity);
+        var response = memberConverter.toMemberResponse(memberEntity);
 
         return response;
     }
@@ -62,7 +63,7 @@ public class MemberBusiness {
     // entity - > response 변환
     public MemberResponse me(Long userId) {
 
-        var entity = memberService.getMemberWithThrow(userId);
+        var entity = memberService.getMember(userId);
         var response = memberConverter.toMemberResponse(entity);
         return response;
     }

@@ -7,6 +7,7 @@ import toy.withme58.api.member.dto.Member;
 import toy.withme58.db.friend.FriendEntity;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.memberfriend.MemberFriendEntity;
+import toy.withme58.db.memberfriend.enums.MemberFriendStatus;
 
 @Converter
 @RequiredArgsConstructor
@@ -20,7 +21,6 @@ public class MemberFriendConverter {
         MemberFriendEntity memberFriendEntity = new MemberFriendEntity();
         memberFriendEntity.makeMember(memberEntity);
         memberFriendEntity.makeFriend(friendEntity);
-
         return memberFriendEntity;
     }
 }

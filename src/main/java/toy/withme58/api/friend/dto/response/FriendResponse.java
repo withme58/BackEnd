@@ -1,4 +1,4 @@
-package toy.withme58.api.friend.dto;
+package toy.withme58.api.friend.dto.response;
 
 import lombok.*;
 import toy.withme58.db.friend.enums.FriendStatus;

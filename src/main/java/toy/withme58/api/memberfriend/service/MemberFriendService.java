@@ -6,6 +6,7 @@ import toy.withme58.api.common.error.ErrorCode;
 import toy.withme58.api.common.exception.ApiException;
 import toy.withme58.db.memberfriend.MemberFriendEntity;
 import toy.withme58.db.memberfriend.MemberFriendRepository;
+import toy.withme58.db.memberfriend.enums.MemberFriendStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,6 +27,7 @@ public class MemberFriendService {
         return Optional.ofNullable(memberFriendEntity)
                 .map(it->{
                     it.setCreatedAt(LocalDateTime.now());
+                    it.setStatus(MemberFriendStatus.WAITING);
                     return memberFriendRepository.save(it);
                 })
                 .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
@@ -34,24 +36,60 @@ public class MemberFriendService {
 
     //*************조회***********
 
-    //memberId 받을 시 모든 friendId List 로 넘겨주기
-
-    public List<MemberFriendEntity> searchListByMemberId(Long memberId){
-        return memberFriendRepository.findAllByMemberIdOrderByIdDesc(memberId);
+    //memberId 받을 시 모든 friendId List 로 넘겨주기 친구 등록 성공인 경우
+    public List<MemberFriendEntity> searchListByMemberIdAndRegistered(Long memberId){
+        return memberFriendRepository.findAllByMemberIdAndStatusOrderByIdDesc(memberId,MemberFriendStatus.REGISTERED);
     }
 
-    //memberId 와 friendId 받을시 특정 entry 전달하기
+    public List<MemberFriendEntity> searchListByMemberIdAndWaiting(Long memberId){
+        return memberFriendRepository.findAllByMemberIdAndStatusOrderByIdDesc(memberId,MemberFriendStatus.WAITING);
+    }
 
-    public MemberFriendEntity searchOne(Long memberId , Long friendId){
-        var memberFriendEntity = memberFriendRepository.findFirstByMemberIdAndFriendIdOrderByIdDesc(memberId,friendId);
+
+    //memberId 와 friendId 받을시 특정 entry 전달하기
+    //단 status 가 REGISTERED 인경우
+    public MemberFriendEntity searchOneRegistered(Long memberId , Long friendId){
+
+        var memberFriendEntity = memberFriendRepository
+                .findFirstByMemberIdAndFriendIdAndStatusOrderByIdDesc(memberId,friendId,MemberFriendStatus.REGISTERED);
+
         return memberFriendEntity.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
 
     }
+    //단 status 가 WAITING 인경우
+    public MemberFriendEntity searchOneWaiting(Long memberId , Long friendId){
+
+        var memberFriendEntity = memberFriendRepository
+                .findFirstByMemberIdAndFriendIdAndStatusOrderByIdDesc(memberId,friendId,MemberFriendStatus.WAITING);
+
+        return memberFriendEntity.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+    }
+
+
 
     //********삭제************
 
     public void deleteOne(Long memberId, Long friendId){
-        memberFriendRepository.deleteByMemberIdAndFriendId(memberId,friendId);
+        memberFriendRepository.deleteByMemberIdAndFriendId(memberId,friendId,MemberFriendStatus.UNREGISTERED);
     }
+
+
+    //******상태변경하기********
+    public MemberFriendEntity setStatus(MemberFriendEntity entity, MemberFriendStatus status){
+        entity.setStatus(status);
+        return memberFriendRepository.save(entity);
+    }
+
+    public MemberFriendEntity statusRegistered(MemberFriendEntity entity){
+        entity.setRegisteredAt(LocalDateTime.now());
+        return setStatus(entity, MemberFriendStatus.REGISTERED);
+    }
+
+    public MemberFriendEntity statusUnRegistered(MemberFriendEntity entity){
+        entity.setRegisteredAt(LocalDateTime.now());
+        return setStatus(entity, MemberFriendStatus.UNREGISTERED);
+    }
+
+
 
 }

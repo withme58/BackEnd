@@ -31,11 +31,11 @@ public class MemberService {
 
 
     public MemberEntity login(String email, String password) {
-        var memberEntity = getMemberWithThrow(email,password);
+        var memberEntity = getMember(email,password);
         return memberEntity;
     }
 
-    public MemberEntity getMemberWithThrow(
+    public MemberEntity getMember(
             String email,
             String password
     ){
@@ -46,7 +46,7 @@ public class MemberService {
         ).orElseThrow(()->new ApiException(MemberErrorCode.Member_Not_Found));
     }
 
-    public MemberEntity getMemberWithThrow(
+    public MemberEntity getMember(
             Long memberId
     ){
         return memberRepository.findFirstByIdAndStatusOrderByIdDesc(memberId, MemberStatus.REGISTERED)

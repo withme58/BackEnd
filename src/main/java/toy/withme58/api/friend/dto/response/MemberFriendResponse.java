@@ -1,9 +1,7 @@
-package toy.withme58.api.friend.dto;
+package toy.withme58.api.friend.dto.response;
 
 import lombok.*;
 import toy.withme58.api.member.dto.response.MemberResponse;
-import toy.withme58.db.friend.FriendEntity;
-import toy.withme58.db.friend.enums.FriendStatus;
 
 import java.util.List;
 
