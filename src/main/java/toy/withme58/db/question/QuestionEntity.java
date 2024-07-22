@@ -3,6 +3,7 @@ package toy.withme58.db.question;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import toy.withme58.db.memberfriend.MemberFriendEntity;
 import toy.withme58.db.memberquestion.MemberQuestionEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 @Entity
 public class QuestionEntity {
 
