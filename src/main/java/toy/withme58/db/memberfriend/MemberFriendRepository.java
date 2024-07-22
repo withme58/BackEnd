@@ -21,7 +21,7 @@ public interface MemberFriendRepository extends JpaRepository<MemberFriendEntity
     List<MemberFriendEntity> findAllByMemberIdOrderByIdDesc(Long memberId);
 
     //memberId 와 특정 frinedId 를 받으면 해당 개체 전달
-    //select * from member_friend where memberId = ? friendId = ? order by id desc
+    //select * from member_friend where memberId = ? friendId = ? order by id desc limit 1
 
     Optional<MemberFriendEntity> findFirstByMemberIdAndFriendIdOrderByIdDesc(Long memberId, Long friendId);
 

@@ -8,6 +8,7 @@ import toy.withme58.api.common.error.MemberErrorCode;
 import toy.withme58.api.common.exception.ApiException;
 import toy.withme58.api.common.token.business.TokenBusiness;
 import toy.withme58.api.common.token.controller.model.TokenResponse;
+import toy.withme58.api.friend.business.FriendBusiness;
 import toy.withme58.api.member.dto.request.MemberLoginRequest;
 import toy.withme58.api.member.dto.request.MemberRegisterRequest;
 import toy.withme58.api.member.dto.response.MemberResponse;
@@ -23,6 +24,8 @@ public class MemberBusiness {
 
     private final TokenBusiness tokenBusiness;
 
+    private final FriendBusiness friendBusiness;
+
 
     /*
     * 1. request -> entity  로 변환
@@ -37,6 +40,7 @@ public class MemberBusiness {
         var entity = memberConverter.toMemberEntity(memberRegisterRequest);
 
         var userEntity = memberService.register(entity);
+
 
         var response = memberConverter.toMemberResponse(userEntity);
 
