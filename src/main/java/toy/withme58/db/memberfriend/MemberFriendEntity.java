@@ -35,5 +35,14 @@ public class MemberFriendEntity {
     private LocalDateTime createdAt;
 
 
+    public void makeMember(MemberEntity member){
+        this.member = member;
+        member.getMemberFriendList().add(this);
+    }
+
+    public void makeFriend(FriendEntity friend){
+        this.friend = friend;
+        friend.getMemberFriendList().add(this);
+    }
 
 }
