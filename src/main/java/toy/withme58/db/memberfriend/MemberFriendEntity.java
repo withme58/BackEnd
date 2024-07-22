@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import toy.withme58.db.friend.FriendEntity;
 import toy.withme58.db.member.MemberEntity;
+import toy.withme58.db.memberfriend.enums.MemberFriendStatus;
 
 import java.time.LocalDateTime;
 
@@ -31,8 +32,14 @@ public class MemberFriendEntity {
     @JoinColumn(name = "member_id")
     private MemberEntity member;
 
-    @Column(nullable = false)
+
     private LocalDateTime createdAt;
+
+    @Column(columnDefinition = "varchar(50)" , nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MemberFriendStatus status;
+
+
 
 
     public void makeMember(MemberEntity member){
