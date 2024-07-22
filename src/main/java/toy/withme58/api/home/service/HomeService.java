@@ -23,7 +23,6 @@ public class HomeService {
     private final QuestionRepository questionRepository;
 
     public String findQuestion(Long memberId) {
-
         Random random = new Random();
 
         List<Long> idxList = IntStream.rangeClosed(1, 10)
@@ -34,13 +33,17 @@ public class HomeService {
         int randomIdx = random.nextInt(idxList.size());
         Long questionId = idxList.get(randomIdx);
 
+        saveData(memberId, questionId);
+
+        return questionRepository.findById(questionId).get().getTitle();
+    }
+
+    private void saveData(Long memberId, Long questionId) {
         MemberEntity member = memberRepository.findById(memberId).get();
         QuestionEntity question = questionRepository.findById(questionId).get();
         LocalDateTime createAt = LocalDateTime.now();
 
         MemberQuestionEntity memberQuestionEntity = new MemberQuestionEntity(createAt, member, question);
         memberQuestionRepository.save(memberQuestionEntity);
-        
-        return null;
     }
 }
