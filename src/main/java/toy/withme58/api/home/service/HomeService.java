@@ -2,6 +2,8 @@ package toy.withme58.api.home.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import toy.withme58.api.common.error.ErrorCode;
+import toy.withme58.api.common.exception.ApiException;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.member.MemberRepository;
 import toy.withme58.db.memberquestion.MemberQuestionEntity;
@@ -39,8 +41,8 @@ public class HomeService {
     }
 
     private void saveData(Long memberId, Long questionId) {
-        MemberEntity member = memberRepository.findById(memberId).get();
-        QuestionEntity question = questionRepository.findById(questionId).get();
+        MemberEntity member = memberRepository.findById(memberId).orElseThrow(()->new ApiException(ErrorCode.NULL_POINT));
+        QuestionEntity question = questionRepository.findById(questionId).orElseThrow(()->new ApiException(ErrorCode.NULL_POINT));
         LocalDateTime createAt = LocalDateTime.now();
 
         MemberQuestionEntity memberQuestionEntity = new MemberQuestionEntity(createAt, member, question);
