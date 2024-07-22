@@ -35,6 +35,8 @@ public class MemberFriendEntity {
 
     private LocalDateTime createdAt;
 
+    private LocalDateTime registeredAt;
+
     @Column(columnDefinition = "varchar(50)" , nullable = false)
     @Enumerated(EnumType.STRING)
     private MemberFriendStatus status;
