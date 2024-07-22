@@ -3,6 +3,7 @@ package toy.withme58.api.member.business;
 
 import lombok.RequiredArgsConstructor;
 import toy.withme58.api.common.annotation.Business;
+import toy.withme58.api.common.error.ErrorCode;
 import toy.withme58.api.common.error.MemberErrorCode;
 import toy.withme58.api.common.exception.ApiException;
 import toy.withme58.api.common.token.business.TokenBusiness;
@@ -64,12 +65,15 @@ public class MemberBusiness {
 
     public void validateDuplicate(MemberRegisterRequest request){
 
-        var memberByNameEntity = memberService.getMemberByNameWithThrow(request.getName());
+        var memberByNameEntity = memberService.getMemberByNameWithThrow(request.getName())
+                .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
 
-        var memberByEmailEntity = memberService.getMemberByEmailWithThrow(request.getEmail());
+        var memberByEmailEntity = memberService.getMemberByEmailWithThrow(request.getEmail())
+                .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
 
 
-
+        //TODO 멤버 이름이나 이메일이 같으면 예외를 발생시키는데
+        //TODO 예외를 발생시키는 경우 대처도 백엔드가 해야 되나?
         if(memberByNameEntity!=null){
             throw new ApiException(MemberErrorCode.Member_Name_Duplicate);
         }

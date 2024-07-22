@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import lombok.*;
 import toy.withme58.db.member.enums.MemberStatus;
 import toy.withme58.db.memberfriend.MemberFriendEntity;
+import toy.withme58.db.memberquestion.MemberQuestionEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -42,5 +43,8 @@ public class MemberEntity {
 
     @OneToMany(mappedBy = "member")
     private List<MemberFriendEntity> memberFriendList = List.of();
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberQuestionEntity> memberQuestionList = List.of();
 
 }
