@@ -19,7 +19,9 @@ public class HomeController {
     private final HomeBusiness homeBusiness;
 
     @GetMapping
-    public Api<HomeResponse> home(@MemberSession Member member) {
+    public Api<HomeResponse> home(
+            @Parameter(hidden=true)
+            @MemberSession Member member) {
         HomeResponse homeResponse = homeBusiness.homeResponse(member.getId());
         return Api.OK(homeResponse);
     }

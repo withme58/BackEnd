@@ -3,8 +3,8 @@ package toy.withme58.db.question;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import toy.withme58.db.memberfriend.MemberFriendEntity;
 import toy.withme58.db.memberquestion.MemberQuestionEntity;
 import toy.withme58.db.question.enums.QuestionStatus;
 
@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 @Entity
 public class QuestionEntity {
 
@@ -33,4 +34,10 @@ public class QuestionEntity {
 
     @OneToMany(mappedBy = "question")
     private List<MemberQuestionEntity> memberQuestionList = List.of();
+
+    public QuestionEntity(String title, String colorCode, QuestionStatus status) {
+        this.title = title;
+        this.colorCode = colorCode;
+        this.status = status;
+    }
 }
