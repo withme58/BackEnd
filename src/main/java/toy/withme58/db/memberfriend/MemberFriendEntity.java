@@ -33,7 +33,4 @@ public class MemberFriendEntity {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
-
-
-
 }
