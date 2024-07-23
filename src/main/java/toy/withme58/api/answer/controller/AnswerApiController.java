@@ -15,13 +15,13 @@ import toy.withme58.api.member.dto.Member;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/answer")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class AnswerApiController {
 
     private final AnswerBusiness answerBusiness;
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public Api<List<AnswerResponse>> showAllList(
             @Parameter(hidden = true)
             @MemberSession Member member
@@ -31,12 +31,12 @@ public class AnswerApiController {
         return Api.OK(responseList);
     }
 
-    @GetMapping("/")
+    @GetMapping("/one")
     public Api<AnswerResponse> showOne(
             @Parameter(hidden = true)
             @MemberSession Member member,
 
-            @RequestParam Long questionId
+            @RequestParam("questionId") Long questionId
     ){
         AnswerResponse response = answerBusiness.getOneByQuestionId(member,questionId);
 

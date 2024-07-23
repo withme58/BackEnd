@@ -26,13 +26,13 @@ public class AnswerService {
     //전체조회
     public List<AnswerEntity> getAllListByReceiverId(Long receiverId){
 
-        return answerRepository.findAllByReceiverIdOrderByDesc(receiverId);
+        return answerRepository.findAllByReceiverIdOrderByIdDesc(receiverId);
     }
 
     //단일조회
     public AnswerEntity getOneByReceiverIdAndQuestionId(Long receiverId, Long questionId){
 
-        return answerRepository.findFirstByReceiverIdAndQuestionIdOrderByDesc(receiverId,questionId)
+        return answerRepository.findFirstByReceiverIdAndQuestionIdOrderByIdDesc(receiverId,questionId)
                 .orElseThrow(()->new ApiException(ErrorCode.NULL_POINT));
     }
 }

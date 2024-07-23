@@ -11,10 +11,12 @@ public interface AnswerRepository extends JpaRepository<AnswerEntity,Long> {
 
     //memberId와 receiverId가 같은 것을 전체 보여주기
     //select * from answer where receiverId = ? order by id desc
-    List<AnswerEntity> findAllByReceiverIdOrderByDesc(Long receiverId);
+    List<AnswerEntity> findAllByReceiverIdOrderByIdDesc(Long receiverId);
 
     //memberId와 questionId 를 받은경우 상세 조회
     //select * from answer where receiverId = ? and questionId = ? order by id desc
-    Optional<AnswerEntity> findFirstByReceiverIdAndQuestionIdOrderByDesc(Long receiverId , Long questionId);
+    Optional<AnswerEntity> findFirstByReceiverIdAndQuestionIdOrderByIdDesc(Long receiverId , Long questionId);
+
+
 
 }
