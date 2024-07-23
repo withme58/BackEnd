@@ -1,5 +1,6 @@
 package toy.withme58.api.home.controller;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,9 @@ public class HomeController {
     private final HomeBusiness homeBusiness;
 
     @GetMapping
-    public Api<HomeResponse> home(@MemberSession Member member) {
+    public Api<HomeResponse> home(
+            @Parameter(hidden=true)
+            @MemberSession Member member) {
         HomeResponse homeResponse = homeBusiness.homeResponse(member.getId());
         return Api.OK(homeResponse);
     }
