@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 import lombok.*;
 import toy.withme58.db.friend.FriendEntity;
 import toy.withme58.db.member.MemberEntity;
+import toy.withme58.db.memberfriend.enums.MemberFriendStatus;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name ="member_friend")
+@Table(name = "member_friend")
 @Setter
 @Getter
 @AllArgsConstructor
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 public class MemberFriendEntity {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -31,6 +32,24 @@ public class MemberFriendEntity {
     @JoinColumn(name = "member_id")
     private MemberEntity member;
 
-    @Column(nullable = false)
+
     private LocalDateTime createdAt;
+
+    private LocalDateTime registeredAt;
+
+    @Column(columnDefinition = "varchar(50)", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MemberFriendStatus status;
+
+
+    public void makeMember(MemberEntity member) {
+        this.member = member;
+        member.getMemberFriendList().add(this);
+    }
+
+    public void makeFriend(FriendEntity friend) {
+        this.friend = friend;
+        friend.getMemberFriendList().add(this);
+    }
+
 }

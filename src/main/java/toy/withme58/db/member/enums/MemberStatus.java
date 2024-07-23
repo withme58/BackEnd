@@ -11,5 +11,5 @@ public enum MemberStatus {
     UNREGISTERED("해제"),
     ;
 
-        private String status;
+    private String status;
 }
