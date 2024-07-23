@@ -3,6 +3,7 @@ package toy.withme58.api.home.business;
 import lombok.RequiredArgsConstructor;
 import toy.withme58.api.common.annotation.Business;
 import toy.withme58.api.home.converter.HomeConverter;
+import toy.withme58.api.home.dto.response.FriendResponse;
 import toy.withme58.api.home.dto.response.HomeResponse;
 import toy.withme58.api.home.service.HomeService;
 import toy.withme58.db.member.MemberEntity;
@@ -23,5 +24,9 @@ public class HomeBusiness {
         MemberEntity member = memberRepository.findById(memberId).get();
         LocalDateTime createdAt = member.getCreatedAt();
         return homeConverter.homeResponse(question, createdAt);
+    }
+
+    public FriendResponse friendResponse(Long memberId) {
+        homeService.findMe
     }
 }

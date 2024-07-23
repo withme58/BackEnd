@@ -53,7 +53,7 @@ public class HomeService {
         memberQuestionRepository.save(memberQuestionEntity);
     }
 
-    private List<MemberFriendDto> findMemberFriendEntity(Long memberId) {
+    public List<MemberFriendDto> findMemberFriendEntity(Long memberId) {
         return memberFriendRepository.findAllByFriendId(memberId).stream()
                 .filter(memberFriendEntity -> memberFriendEntity.getStatus() == MemberFriendStatus.REGISTERED)
                 .map(memberFriendEntity -> new MemberFriendDto(
