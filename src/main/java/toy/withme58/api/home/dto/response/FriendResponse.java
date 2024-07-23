@@ -7,5 +7,5 @@ import java.util.List;
 @Getter
 public class FriendResponse {
     private String status;
-    private List<String> friends;
+    private List<MemberFriendDto> friends;
 }

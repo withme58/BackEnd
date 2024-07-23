@@ -7,7 +7,6 @@ import toy.withme58.api.common.exception.ApiException;
 import toy.withme58.api.home.dto.response.MemberFriendDto;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.member.MemberRepository;
-import toy.withme58.db.memberfriend.MemberFriendEntity;
 import toy.withme58.db.memberfriend.MemberFriendRepository;
 import toy.withme58.db.memberfriend.enums.MemberFriendStatus;
 import toy.withme58.db.memberquestion.MemberQuestionEntity;

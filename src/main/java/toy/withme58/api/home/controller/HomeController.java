@@ -29,6 +29,5 @@ public class HomeController {
     public Api<FriendResponse> friendResponseApi(
             @Parameter(hidden = true)
             @MemberSession Member member) {
-
     }
 }
