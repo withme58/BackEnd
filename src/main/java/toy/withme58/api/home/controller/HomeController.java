@@ -29,6 +29,7 @@ public class HomeController {
     public Api<FriendResponse> friendResponseApi(
             @Parameter(hidden = true)
             @MemberSession Member member) {
-        return null;
+        FriendResponse friendResponse = homeBusiness.friendResponse(member.getId());
+        return Api.OK(friendResponse);
     }
 }
