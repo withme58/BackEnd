@@ -72,4 +72,9 @@ public class MemberFriendService {
         return setStatus(entity, MemberFriendStatus.UNREGISTERED);
     }
 
+    public MemberFriendEntity statusDeleted(MemberFriendEntity entity){
+        entity.setRegisteredAt(LocalDateTime.now());
+        return setStatus(entity, MemberFriendStatus.DELETED);
+    }
+
 }

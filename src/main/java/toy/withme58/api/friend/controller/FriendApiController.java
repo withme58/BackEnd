@@ -64,8 +64,21 @@ public class FriendApiController {
         return Api.OK(response);
     }
 
-    @GetMapping("/friend/delete")
-    public Api<Object> deleteFriend(
+    @GetMapping("/friend/reject")
+    public Api<FriendResponse> rejectFriend(
+            @RequestParam
+            Long friendId,
+
+            @Parameter(hidden=true)
+            @MemberSession Member member
+    ){
+        var response = friendBusiness.rejectFriend(friendId,member);
+
+        return Api.OK(response);
+    }
+
+    @DeleteMapping("/friend/delete")
+    public Api<String> deleteFriend(
             @RequestParam
             Long friendId,
 
