@@ -35,11 +35,12 @@ public class MemberBusiness {
 
     public MemberResponse register(MemberRegisterRequest memberRegisterRequest){
 
-        validateDuplicate(memberRegisterRequest);
+       // validateDuplicate(memberRegisterRequest);
 
         var entity = memberConverter.toMemberEntity(memberRegisterRequest);
 
         var memberEntity = memberService.register(entity);
+
         friendBusiness.registerFriend(memberEntity);
 
 
@@ -70,11 +71,11 @@ public class MemberBusiness {
 
     public void validateDuplicate(MemberRegisterRequest request){
 
-        var memberByNameEntity = memberService.getMemberByNameWithThrow(request.getName())
-                .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
+        var memberByNameEntity = memberService.getMemberByNameWithThrow(request.getName());
 
-        var memberByEmailEntity = memberService.getMemberByEmailWithThrow(request.getEmail())
-                .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
+
+        var memberByEmailEntity = memberService.getMemberByEmailWithThrow(request.getEmail());
+
 
 
         //TODO 멤버 이름이나 이메일이 같으면 예외를 발생시키는데

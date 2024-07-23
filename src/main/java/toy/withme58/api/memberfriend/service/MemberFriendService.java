@@ -17,7 +17,7 @@ import java.util.Optional;
 public class MemberFriendService {
     //저장 조회 삭제
 
-    private MemberFriendRepository memberFriendRepository;
+    private final MemberFriendRepository memberFriendRepository;
 
     //***********저장**********
 
@@ -66,14 +66,6 @@ public class MemberFriendService {
     }
 
 
-
-    //********삭제************
-
-    public void deleteOne(Long memberId, Long friendId){
-        memberFriendRepository.deleteByMemberIdAndFriendId(memberId,friendId,MemberFriendStatus.UNREGISTERED);
-    }
-
-
     //******상태변경하기********
     public MemberFriendEntity setStatus(MemberFriendEntity entity, MemberFriendStatus status){
         entity.setStatus(status);
@@ -89,7 +81,5 @@ public class MemberFriendService {
         entity.setRegisteredAt(LocalDateTime.now());
         return setStatus(entity, MemberFriendStatus.UNREGISTERED);
     }
-
-
 
 }

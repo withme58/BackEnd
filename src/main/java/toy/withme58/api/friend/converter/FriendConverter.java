@@ -3,7 +3,7 @@ package toy.withme58.api.friend.converter;
 import lombok.RequiredArgsConstructor;
 import toy.withme58.api.common.annotation.Converter;
 import toy.withme58.api.friend.dto.response.FriendResponse;
-import toy.withme58.api.friend.dto.response.MemberFriendResponse;
+import toy.withme58.api.friend.dto.response.FriendsResponse;
 import toy.withme58.api.member.dto.response.MemberResponse;
 import toy.withme58.db.friend.FriendEntity;
 import toy.withme58.db.member.MemberEntity;
@@ -34,11 +34,11 @@ public class FriendConverter {
                 .build();
     }
 
-    public MemberFriendResponse toResponse(
+    public FriendsResponse toResponse(
             MemberResponse memberResponse,
             List<FriendResponse> friendResponseList
     ){
-        return MemberFriendResponse.builder()
+        return FriendsResponse.builder()
                 .memberResponse(memberResponse)
                 .friendResponseList(friendResponseList)
                 .build();

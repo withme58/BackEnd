@@ -27,12 +27,4 @@ public interface MemberFriendRepository extends JpaRepository<MemberFriendEntity
     Optional<MemberFriendEntity> findFirstByMemberIdAndFriendIdAndStatusOrderByIdDesc(Long memberId, Long friendId,MemberFriendStatus status);
 
 
-
-    //삭제
-    //memberId 와 특정 friendId 를 받으면 해당 개체를 삭제해주세요
-    @Modifying
-    @Transactional
-    @Query("DELETE FROM MemberFriendEntity m where m.memberId = :memberId and m.friendId = :friendId and m.status = :status")
-    void deleteByMemberIdAndFriendId(@Param("memberId") Long memberId , @Param("friendId") Long friendId ,@Param("status")MemberFriendStatus status);
-
 }

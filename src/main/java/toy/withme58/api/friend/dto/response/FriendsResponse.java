@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberFriendResponse {
+public class FriendsResponse {
 
     private MemberResponse memberResponse;
 
