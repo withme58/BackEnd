@@ -41,8 +41,7 @@ public class MemberFriendEntity {
     @Enumerated(EnumType.STRING)
     private MemberFriendStatus status;
 
-
-    public void makeMember(MemberEntity member) {
+    public void makeMember(MemberEntity member){
         this.member = member;
         member.getMemberFriendList().add(this);
     }
