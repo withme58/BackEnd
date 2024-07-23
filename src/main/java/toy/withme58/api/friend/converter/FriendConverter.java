@@ -6,6 +6,7 @@ import toy.withme58.api.friend.dto.response.FriendResponse;
 import toy.withme58.api.friend.dto.response.FriendsResponse;
 import toy.withme58.api.member.dto.response.MemberResponse;
 import toy.withme58.db.friend.FriendEntity;
+import toy.withme58.db.friend.enums.FriendStatus;
 import toy.withme58.db.member.MemberEntity;
 
 import java.util.List;
@@ -43,4 +44,16 @@ public class FriendConverter {
                 .friendResponseList(friendResponseList)
                 .build();
     }
+
+    public FriendResponse toResponseByMember(
+            MemberEntity memberEntity
+    ){
+        return FriendResponse.builder()
+                .id(memberEntity.getId())
+                .email(memberEntity.getEmail())
+                .name(memberEntity.getName())
+                .status(FriendStatus.REGISTERED)
+                .build();
+    }
+
 }

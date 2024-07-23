@@ -47,14 +47,15 @@ public class FriendBusiness {
             Member member
     ) {
         var memberEntity = memberService.getMember(member.getId());
+        var friendId = memberEntity.getId();
+        var friendEntity = friendService.searchOne(friendId);
 
-
-        var memberFriendList = memberEntity.getMemberFriendList();
+        var memberFriendList = friendEntity.getMemberFriendList();
 
         var friendResponseList = memberFriendList.stream()
                 .filter(it-> it.getStatus()==MemberFriendStatus.REGISTERED)
                 .map(it->{
-                    return friendConverter.toResponse(it.getFriend());
+                    return friendConverter.toResponseByMember(it.getMember());
                 })
                 .toList();
 
@@ -62,6 +63,30 @@ public class FriendBusiness {
 
         return friendConverter.toResponse(memberResponse,friendResponseList);
     }
+
+    //Status == waiting 인 경우
+    public FriendsResponse getFriendWaitingByMember(Member member) {
+
+        var memberEntity = memberService.getMember(member.getId());
+        var friendId = memberEntity.getId();
+        var friendEntity = friendService.searchOne(friendId);
+
+        var memberFriendList = friendEntity.getMemberFriendList();
+
+        var friendResponseList = memberFriendList.stream()
+                .filter(it->it.getStatus()==MemberFriendStatus.WAITING)
+                .map(it->{
+                   return friendConverter.toResponseByMember(it.getMember());
+                })
+                .toList();
+
+        var memberResponse = memberConverter.toMemberResponse(memberEntity);
+
+        return friendConverter.toResponse(memberResponse,friendResponseList);
+
+    }
+
+
 
     public FriendResponse acceptFriend(Long friendId , Member member) {
 
@@ -84,13 +109,6 @@ public class FriendBusiness {
 
         var friendEntity = friendService.searchOne(request.getName());
         var entity = memberFriendConverter.toEntity(memberEntity,friendEntity);
-        if(friendEntity==null){
-            log.info("friendEntity null");
-        }
-        if(friendEntity==null){
-            log.info("entity null");
-        }
-
         var memberFriendEntity = memberFriendService.create(entity);
 
         var memberResponse = memberConverter.toMemberResponse(memberEntity);
@@ -123,4 +141,5 @@ public class FriendBusiness {
 
         memberFriendService.statusUnRegistered(memberFriendEntity);
     }
+
 }

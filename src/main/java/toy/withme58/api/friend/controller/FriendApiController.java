@@ -29,6 +29,15 @@ public class FriendApiController {
         return Api.OK(response);
     }
 
+    @GetMapping("/friend/waiting")
+    public Api<FriendsResponse> showFriendWaitingList(
+            @Parameter(hidden = true)
+            @MemberSession Member member
+    ){
+        var response = friendBusiness.getFriendWaitingByMember(member);
+        return Api.OK(response);
+    }
+
     @PostMapping("/friend/request")
     public Api<MemberFriendResponse> requestFriend(
             @Valid @RequestBody

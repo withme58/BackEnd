@@ -33,25 +33,15 @@ public class MemberFriendService {
                 .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
     }
 
-
     //*************조회***********
-
-    //memberId 받을 시 모든 friendId List 로 넘겨주기 친구 등록 성공인 경우
-    public List<MemberFriendEntity> searchListByMemberIdAndRegistered(Long memberId){
-        return memberFriendRepository.findAllByMemberIdAndStatusOrderByIdDesc(memberId,MemberFriendStatus.REGISTERED);
-    }
-
-    public List<MemberFriendEntity> searchListByMemberIdAndWaiting(Long memberId){
-        return memberFriendRepository.findAllByMemberIdAndStatusOrderByIdDesc(memberId,MemberFriendStatus.WAITING);
-    }
-
 
     //memberId 와 friendId 받을시 특정 entry 전달하기
     //단 status 가 REGISTERED 인경우
     public MemberFriendEntity searchOneRegistered(Long memberId , Long friendId){
+        //todo 주객이 전도된 상황이라 memberId와 friendId를 바꿔서 넣어야 된다. 어떻게 해결해야 될까?
 
         var memberFriendEntity = memberFriendRepository
-                .findFirstByMemberIdAndFriendIdAndStatusOrderByIdDesc(memberId,friendId,MemberFriendStatus.REGISTERED);
+                .findFirstByMemberIdAndFriendIdAndStatusOrderByIdDesc(friendId,memberId,MemberFriendStatus.REGISTERED);
 
         return memberFriendEntity.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
 
@@ -60,7 +50,7 @@ public class MemberFriendService {
     public MemberFriendEntity searchOneWaiting(Long memberId , Long friendId){
 
         var memberFriendEntity = memberFriendRepository
-                .findFirstByMemberIdAndFriendIdAndStatusOrderByIdDesc(memberId,friendId,MemberFriendStatus.WAITING);
+                .findFirstByMemberIdAndFriendIdAndStatusOrderByIdDesc(friendId,memberId,MemberFriendStatus.WAITING);
 
         return memberFriendEntity.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
     }
