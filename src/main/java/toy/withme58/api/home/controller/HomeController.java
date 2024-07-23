@@ -25,11 +25,9 @@ public class HomeController {
         return Api.OK(homeResponse);
     }
 
-    @GetMapping("/{myId}")
+    @GetMapping("/myfriends")
     public Api<FriendResponse> friendResponseApi(
             @Parameter(hidden = true)
-            @MemberSession Member member,
-            @PathVariable String myId) {
-        
+            @MemberSession Member member) {
     }
 }
