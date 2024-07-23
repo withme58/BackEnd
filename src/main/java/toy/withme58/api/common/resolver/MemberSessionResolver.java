@@ -38,7 +38,7 @@ public class MemberSessionResolver implements HandlerMethodArgumentResolver {
 
         var memberId = requestContext.getAttribute("memberId", RequestAttributes.SCOPE_REQUEST);
 
-        var memberEntity = memberService.getMemberWithThrow(Long.parseLong(memberId.toString()));
+        var memberEntity = memberService.getMember(Long.parseLong(memberId.toString()));
 
         return Member.builder()
                 .id(memberEntity.getId())

@@ -18,10 +18,11 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class JwtTokenHelper implements TokenHelperIfs {
-
 
     @Value("${token.secret.key}")
     private String secretKey;
@@ -31,6 +32,8 @@ public class JwtTokenHelper implements TokenHelperIfs {
 
     @Value("${token.refresh-token.plus-hour}")
     private Long refreshTokenPlusHour;
+
+    private Set<String> blackList = ConcurrentHashMap.newKeySet();
 
     @Override
     public TokenDto issueAccessToken(Map<String, Object> data) {
@@ -79,6 +82,8 @@ public class JwtTokenHelper implements TokenHelperIfs {
 
     @Override
     public Map<String, Object> validationTokenWithThrow(String token) {
+
+
         var key = Keys.hmacShaKeyFor(secretKey.getBytes());
 
         var parser = Jwts.parserBuilder()
@@ -106,4 +111,6 @@ public class JwtTokenHelper implements TokenHelperIfs {
             }
         }
     }
+
+
 }

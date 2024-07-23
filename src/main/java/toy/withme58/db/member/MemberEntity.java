@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import lombok.*;
 import toy.withme58.db.member.enums.MemberStatus;
 import toy.withme58.db.memberfriend.MemberFriendEntity;
+import toy.withme58.db.memberquestion.MemberQuestionEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -50,4 +51,5 @@ public class MemberEntity {
         this.createdAt = createdAt;
         this.status = status;
     }
+
 }
