@@ -32,5 +32,13 @@ public class MemberQuestionEntity {
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "question_id")
-    private QuestionEntity question;
+    private QuestionEntity question; //1~10까지 랜덤돌리고 member_id와 question_id에 해당하는
+    // memberquestion db createAt값이 있으면 다른 값 선정
+
+
+    public MemberQuestionEntity(LocalDateTime createdAt, MemberEntity member, QuestionEntity question) {
+        this.createdAt = createdAt;
+        this.member = member;
+        this.question = question;
+    }
 }
