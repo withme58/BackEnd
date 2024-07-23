@@ -21,7 +21,6 @@ public class AnswerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //todo question_id 연관관계 추가해야 됨
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "question_id")
