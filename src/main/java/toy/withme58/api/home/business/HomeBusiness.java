@@ -5,11 +5,13 @@ import toy.withme58.api.common.annotation.Business;
 import toy.withme58.api.home.converter.HomeConverter;
 import toy.withme58.api.home.dto.response.FriendResponse;
 import toy.withme58.api.home.dto.response.HomeResponse;
+import toy.withme58.api.home.dto.response.MemberFriendDto;
 import toy.withme58.api.home.service.HomeService;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.member.MemberRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Business
 @RequiredArgsConstructor
@@ -27,6 +29,7 @@ public class HomeBusiness {
     }
 
     public FriendResponse friendResponse(Long memberId) {
-        homeService.findMe
+        List<MemberFriendDto> memberFriendEntity = homeService.findMemberFriendEntity(memberId);
+        return homeConverter.friendResponse(memberFriendEntity);
     }
 }

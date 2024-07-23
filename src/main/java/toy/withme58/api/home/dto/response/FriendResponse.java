@@ -1,9 +1,11 @@
 package toy.withme58.api.home.dto.response;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
 
+@Builder
 @Getter
 public class FriendResponse {
     private String status;
