@@ -6,6 +6,7 @@ import toy.withme58.api.home.converter.HomeConverter;
 import toy.withme58.api.home.dto.response.HomeFriendResponse;
 import toy.withme58.api.home.dto.response.HomeResponse;
 import toy.withme58.api.home.dto.response.MemberFriendDto;
+import toy.withme58.api.home.dto.response.SendQuestionResponse;
 import toy.withme58.api.home.service.HomeService;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.member.MemberRepository;
@@ -43,5 +44,9 @@ public class HomeBusiness {
 
     public void saveQuestion(Long senderId, Long receiverId, Long questionId) {
         homeService.saveQuestion(senderId, receiverId, questionId);
+    }
+
+    public SendQuestionResponse sendQuestionResponse(){
+        return homeConverter.sendQuestionResponse();
     }
 }

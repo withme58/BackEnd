@@ -9,6 +9,7 @@ import toy.withme58.api.home.business.HomeBusiness;
 import toy.withme58.api.home.dto.request.SendQuestionRequestDto;
 import toy.withme58.api.home.dto.response.HomeFriendResponse;
 import toy.withme58.api.home.dto.response.HomeResponse;
+import toy.withme58.api.home.dto.response.SendQuestionResponse;
 import toy.withme58.api.member.dto.Member;
 import toy.withme58.db.answer.enums.AnswerStatus;
 
@@ -44,6 +45,7 @@ public class HomeController {
         Long receiverId = homeBusiness.findReceiverIdByFriendName(requestDto.getFriendName());
         Long senderId = homeBusiness.findSenderId(member.getId());
         homeBusiness.saveQuestion(senderId, receiverId, requestDto.getQuestionId());
-        return Api.OK(AnswerStatus.REGISTERED);
+        SendQuestionResponse sendQuestionResponse = homeBusiness.sendQuestionResponse();
+        return Api.OK(sendQuestionResponse);
     }
 }
