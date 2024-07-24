@@ -38,7 +38,10 @@ class HomeServiceTest {
         questionRepository.save(new QuestionEntity("9", "A", QuestionStatus.REGISTERED));
         questionRepository.save(new QuestionEntity("10", "A", QuestionStatus.REGISTERED));
 
-        MemberEntity member1 = new MemberEntity("1@naver.com", "1", "김수민", localDateTime, MemberStatus.REGISTERED);
+        MemberEntity member1 = MemberEntity.builder().email("1@naver.com")
+                .password("1").name("김수민")
+                .createdAt(localDateTime).status(MemberStatus.REGISTERED).build();
+
         memberRepository.save(member1);
         System.out.println("member1 = " + member1.getId());
 
