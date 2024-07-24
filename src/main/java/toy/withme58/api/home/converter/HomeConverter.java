@@ -1,7 +1,7 @@
 package toy.withme58.api.home.converter;
 
 import toy.withme58.api.common.annotation.Converter;
-import toy.withme58.api.home.dto.response.FriendResponse;
+import toy.withme58.api.home.dto.response.HomeFriendResponse;
 import toy.withme58.api.home.dto.response.HomeResponse;
 import toy.withme58.api.home.dto.response.MemberFriendDto;
 import toy.withme58.db.member.enums.MemberStatus;
@@ -20,8 +20,8 @@ public class HomeConverter {
                 .status(MemberStatus.REGISTERED.getStatus()).build();
     }
 
-    public FriendResponse friendResponse(List<MemberFriendDto> dto) {
-        return FriendResponse.builder()
+    public HomeFriendResponse friendResponse(List<MemberFriendDto> dto) {
+        return HomeFriendResponse.builder()
                 .friends(dto)
                 .status(MemberFriendStatus.REGISTERED.getStatus()).build();
     }

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import toy.withme58.api.common.annotation.MemberSession;
 import toy.withme58.api.common.api.Api;
 import toy.withme58.api.home.business.HomeBusiness;
-import toy.withme58.api.home.dto.response.FriendResponse;
+import toy.withme58.api.home.dto.response.HomeFriendResponse;
 import toy.withme58.api.home.dto.response.HomeResponse;
 import toy.withme58.api.member.dto.Member;
 
@@ -26,10 +26,10 @@ public class HomeController {
     }
 
     @GetMapping("/myfriends")
-    public Api<FriendResponse> friendResponseApi(
+    public Api<HomeFriendResponse> friendResponseApi(
             @Parameter(hidden = true)
             @MemberSession Member member) {
-        FriendResponse friendResponse = homeBusiness.friendResponse(member.getId());
-        return Api.OK(friendResponse);
+        HomeFriendResponse homeFriendResponse = homeBusiness.friendResponse(member.getId());
+        return Api.OK(homeFriendResponse);
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Builder
 @Getter
-public class FriendResponse {
+public class HomeFriendResponse {
     private String status;
     private List<MemberFriendDto> friends;
 }
