@@ -18,4 +18,6 @@ public interface MemberRepository extends JpaRepository<MemberEntity,Long> {
 
     //이메일로 조회
     Optional<MemberEntity> findFirstByEmailOrderByIdDesc(String email);
+
+    Optional<MemberEntity> findByName(String name);
 }

@@ -32,4 +32,16 @@ public class HomeBusiness {
         List<MemberFriendDto> memberFriendEntity = homeService.findMemberFriendEntity(memberId);
         return homeConverter.friendResponse(memberFriendEntity);
     }
+
+    public Long findReceiverIdByFriendName(String friendName) {
+        return homeService.findReceiverIdByFriendName(friendName);
+    }
+
+    public Long findSenderId(Long memberId) {
+        return homeService.findSenderId(memberId);
+    }
+
+    public void saveQuestion(Long senderId, Long receiverId, Long questionId) {
+        homeService.saveQuestion(senderId, receiverId, questionId);
+    }
 }

@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import toy.withme58.api.common.error.ErrorCode;
 import toy.withme58.api.common.exception.ApiException;
 import toy.withme58.api.home.dto.response.MemberFriendDto;
+import toy.withme58.api.home.dto.response.SendQuestionDto;
+import toy.withme58.db.answer.AnswerEntity;
+import toy.withme58.db.answer.AnswerRepository;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.member.MemberRepository;
 import toy.withme58.db.memberfriend.MemberFriendRepository;
@@ -27,6 +30,7 @@ public class HomeService {
     private final MemberRepository memberRepository;
     private final QuestionRepository questionRepository;
     private final MemberFriendRepository memberFriendRepository;
+    private final AnswerRepository answerRepository;
 
     public String findQuestion(Long memberId) {
         Random random = new Random();
@@ -60,5 +64,37 @@ public class HomeService {
                         memberFriendEntity.getMember().getId(), memberFriendEntity.getMember().getName()
                 ))
                 .toList();
+    }
+
+    public Long findReceiverIdByFriendName(String friendName) {
+        MemberEntity member = memberRepository.findByName(friendName)
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+        return member.getId();
+    }
+
+    public Long findSenderId(Long memberId) {
+        MemberEntity member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+        return member.getId();
+    }
+
+    public void saveQuestion(Long senderId, Long receiverId, Long questionId) {
+        SendQuestionDto sendQuestionDto = makeSendQuestion(senderId, receiverId, questionId);
+
+        AnswerEntity answer = AnswerEntity.builder()
+                .question(sendQuestionDto.getQuestion())
+                .createdAt(sendQuestionDto.getCreateAt())
+                .receiverId(sendQuestionDto.getReceiverId())
+                .senderId(sendQuestionDto.getSenderId())
+                .build();
+
+        answerRepository.save(answer);
+    }
+
+    private SendQuestionDto makeSendQuestion(Long senderId, Long receiverId, Long questionId) {
+        QuestionEntity question = questionRepository.findById(questionId)
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+
+        return new SendQuestionDto(question, LocalDateTime.now(), receiverId, senderId);
     }
 }
