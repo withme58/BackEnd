@@ -11,7 +11,6 @@ import toy.withme58.api.home.dto.response.HomeFriendResponse;
 import toy.withme58.api.home.dto.response.HomeResponse;
 import toy.withme58.api.home.dto.response.SendQuestionResponse;
 import toy.withme58.api.member.dto.Member;
-import toy.withme58.db.answer.enums.AnswerStatus;
 
 @RequiredArgsConstructor
 @RequestMapping("/api")
