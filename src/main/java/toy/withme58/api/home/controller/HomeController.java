@@ -10,6 +10,7 @@ import toy.withme58.api.home.dto.request.SendQuestionRequestDto;
 import toy.withme58.api.home.dto.response.HomeFriendResponse;
 import toy.withme58.api.home.dto.response.HomeResponse;
 import toy.withme58.api.member.dto.Member;
+import toy.withme58.db.answer.enums.AnswerStatus;
 
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -40,6 +41,9 @@ public class HomeController {
             @MemberSession Member member,
             @RequestBody SendQuestionRequestDto requestDto
     ) {
-        return null;
+        Long receiverId = homeBusiness.findReceiverIdByFriendName(requestDto.getFriendName());
+        Long senderId = homeBusiness.findSenderId(member.getId());
+        homeBusiness.saveQuestion(senderId, receiverId, requestDto.getQuestionId());
+        return Api.OK(AnswerStatus.REGISTERED);
     }
 }
