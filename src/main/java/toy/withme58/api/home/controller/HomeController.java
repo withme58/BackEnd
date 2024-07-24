@@ -36,7 +36,7 @@ public class HomeController {
     }
 
     @PostMapping("/myfriends")
-    public Api sendQuestion(
+    public Api<SendQuestionResponse> sendQuestion(
             @Parameter(hidden = true)
             @MemberSession Member member,
             @RequestBody SendQuestionRequestDto requestDto
