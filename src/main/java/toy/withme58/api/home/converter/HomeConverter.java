@@ -30,6 +30,6 @@ public class HomeConverter {
 
     public SendQuestionResponse sendQuestionResponse() {
         return SendQuestionResponse.builder()
-                .status(AnswerStatus.REGISTERED.getStatus()).build();
+                .status(AnswerStatus.UNREGISTERED.getStatus()).build();
     }
 }

@@ -8,6 +8,7 @@ import toy.withme58.api.home.dto.response.MemberFriendDto;
 import toy.withme58.api.home.dto.response.SendQuestionDto;
 import toy.withme58.db.answer.AnswerEntity;
 import toy.withme58.db.answer.AnswerRepository;
+import toy.withme58.db.answer.enums.AnswerStatus;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.member.MemberRepository;
 import toy.withme58.db.memberfriend.MemberFriendRepository;
@@ -86,6 +87,7 @@ public class HomeService {
                 .createdAt(sendQuestionDto.getCreateAt())
                 .receiverId(sendQuestionDto.getReceiverId())
                 .senderId(sendQuestionDto.getSenderId())
+                .status(AnswerStatus.UNREGISTERED)
                 .build();
 
         answerRepository.save(answer);
