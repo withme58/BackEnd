@@ -34,22 +34,10 @@ public class HomeBusiness {
         return homeConverter.friendResponse(memberFriendEntity);
     }
 
-    private Long findReceiverIdByFriendName(String friendName) {
-        return homeService.findReceiverIdByFriendName(friendName);
-    }
-
-    private Long findSenderId(Long memberId) {
-        return homeService.findSenderId(memberId);
-    }
-
-    private void saveQuestion(Long senderId, Long receiverId, Long questionId) {
-        homeService.saveQuestion(senderId, receiverId, questionId);
-    }
-
     public SendQuestionResponse sendQuestionResponse(String friendName, Long memberId, Long questionId) {
-        Long receiverId = findReceiverIdByFriendName(friendName);
-        Long senderId = findSenderId(memberId);
-        saveQuestion(senderId, receiverId, questionId);
+        Long receiverId = homeService.findReceiverIdByFriendName(friendName);
+        Long senderId = homeService.findSenderId(memberId);
+        homeService.saveQuestion(senderId, receiverId, questionId);
         return homeConverter.sendQuestionResponse();
     }
 }
