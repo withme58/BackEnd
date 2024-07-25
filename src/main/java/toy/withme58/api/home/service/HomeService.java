@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import toy.withme58.api.common.error.ErrorCode;
 import toy.withme58.api.common.exception.ApiException;
-import toy.withme58.api.home.converter.HomeConverter;
 import toy.withme58.api.home.dto.response.MemberFriendDto;
 import toy.withme58.api.home.dto.response.SendQuestionDto;
 import toy.withme58.db.answer.AnswerEntity;
