@@ -41,10 +41,8 @@ public class HomeController {
             @MemberSession Member member,
             @RequestBody SendQuestionRequestDto requestDto
     ) {
-        Long receiverId = homeBusiness.findReceiverIdByFriendName(requestDto.getFriendName());
-        Long senderId = homeBusiness.findSenderId(member.getId());
-        homeBusiness.saveQuestion(senderId, receiverId, requestDto.getQuestionId());
-        SendQuestionResponse sendQuestionResponse = homeBusiness.sendQuestionResponse();
+        SendQuestionResponse sendQuestionResponse = homeBusiness
+                .sendQuestionResponse(requestDto.getFriendName(), member.getId(), requestDto.getQuestionId());
         return Api.OK(sendQuestionResponse);
     }
 }
