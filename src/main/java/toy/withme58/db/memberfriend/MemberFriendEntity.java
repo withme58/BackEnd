@@ -10,7 +10,7 @@ import toy.withme58.db.memberfriend.enums.MemberFriendStatus;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name ="member_friend")
+@Table(name = "member_friend")
 @Setter
 @Getter
 @AllArgsConstructor
@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class MemberFriendEntity {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -37,19 +37,16 @@ public class MemberFriendEntity {
 
     private LocalDateTime registeredAt;
 
-    @Column(columnDefinition = "varchar(50)" , nullable = false)
+    @Column(columnDefinition = "varchar(50)", nullable = false)
     @Enumerated(EnumType.STRING)
     private MemberFriendStatus status;
-
-
-
 
     public void makeMember(MemberEntity member){
         this.member = member;
         member.getMemberFriendList().add(this);
     }
 
-    public void makeFriend(FriendEntity friend){
+    public void makeFriend(FriendEntity friend) {
         this.friend = friend;
         friend.getMemberFriendList().add(this);
     }

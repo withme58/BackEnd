@@ -1,7 +1,9 @@
 package toy.withme58.db.memberfriend.enums;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
 @AllArgsConstructor
 public enum MemberFriendStatus {
 
@@ -12,4 +14,3 @@ public enum MemberFriendStatus {
 
     private String status;
 }
-
