@@ -1,10 +1,8 @@
 package toy.withme58.api.home.converter;
 
 import toy.withme58.api.common.annotation.Converter;
-import toy.withme58.api.home.dto.response.HomeFriendResponse;
-import toy.withme58.api.home.dto.response.HomeResponse;
-import toy.withme58.api.home.dto.response.MemberFriendDto;
-import toy.withme58.api.home.dto.response.SendQuestionResponse;
+import toy.withme58.api.home.dto.response.*;
+import toy.withme58.db.answer.AnswerEntity;
 import toy.withme58.db.answer.enums.AnswerStatus;
 import toy.withme58.db.member.enums.MemberStatus;
 import toy.withme58.db.memberfriend.enums.MemberFriendStatus;
@@ -31,5 +29,13 @@ public class HomeConverter {
     public SendQuestionResponse sendQuestionResponse() {
         return SendQuestionResponse.builder()
                 .status(AnswerStatus.UNREGISTERED.getStatus()).build();
+    }
+
+    public AnswerEntity sendQuestionAnswer(SendQuestionDto sendQuestionDto) {
+        return AnswerEntity.builder().question(sendQuestionDto.getQuestion())
+                .createdAt(sendQuestionDto.getCreateAt()).receiverId(sendQuestionDto.getReceiverId())
+                .senderId(sendQuestionDto.getSenderId())
+                .status(AnswerStatus.UNREGISTERED)
+                .build();
     }
 }

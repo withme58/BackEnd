@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import toy.withme58.api.common.error.ErrorCode;
 import toy.withme58.api.common.exception.ApiException;
+import toy.withme58.api.home.converter.HomeConverter;
 import toy.withme58.api.home.dto.response.MemberFriendDto;
 import toy.withme58.api.home.dto.response.SendQuestionDto;
 import toy.withme58.db.answer.AnswerEntity;
@@ -32,6 +33,7 @@ public class HomeService {
     private final QuestionRepository questionRepository;
     private final MemberFriendRepository memberFriendRepository;
     private final AnswerRepository answerRepository;
+    private final HomeConverter homeConverter;
 
     public String findQuestion(Long memberId) {
         Random random = new Random();
@@ -82,13 +84,7 @@ public class HomeService {
     public void saveQuestion(Long senderId, Long receiverId, Long questionId) {
         SendQuestionDto sendQuestionDto = makeSendQuestion(senderId, receiverId, questionId);
 
-        AnswerEntity answer = AnswerEntity.builder()
-                .question(sendQuestionDto.getQuestion())
-                .createdAt(sendQuestionDto.getCreateAt())
-                .receiverId(sendQuestionDto.getReceiverId())
-                .senderId(sendQuestionDto.getSenderId())
-                .status(AnswerStatus.UNREGISTERED)
-                .build();
+        AnswerEntity answer = homeConverter.sendQuestionAnswer(sendQuestionDto);
 
         answerRepository.save(answer);
     }
