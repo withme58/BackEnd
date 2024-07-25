@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import toy.withme58.api.common.annotation.MemberSession;
 import toy.withme58.api.common.api.Api;
 import toy.withme58.api.member.dto.Member;
+import toy.withme58.api.qustion.business.QuestionBusiness;
 import toy.withme58.api.qustion.dto.response.MyQuestionResponse;
 
 @RequiredArgsConstructor
@@ -15,11 +16,13 @@ import toy.withme58.api.qustion.dto.response.MyQuestionResponse;
 @RestController
 public class QuestionController {
 
+    private final QuestionBusiness questionBusiness;
+
     @GetMapping
     public Api<MyQuestionResponse> myQuestion(
             @Parameter(hidden = true)
             @MemberSession Member member) {
-
-        return null;
+        MyQuestionResponse myQuestionResponse = questionBusiness.myQuestionResponse(member.getId());
+        return Api.OK(myQuestionResponse);
     }
 }
