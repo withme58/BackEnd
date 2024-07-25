@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+import toy.withme58.api.home.converter.HomeConverter;
+import toy.withme58.db.answer.AnswerEntity;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.member.MemberRepository;
 import toy.withme58.db.member.enums.MemberStatus;
@@ -25,6 +27,8 @@ class HomeServiceTest {
     HomeService homeService;
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    HomeConverter homeConverter;
 
     @Test
     public void findQuestion() {
@@ -67,6 +71,7 @@ class HomeServiceTest {
 
         QuestionEntity question = questionRepository.save(new QuestionEntity("1", "A", QuestionStatus.REGISTERED));
 
-        homeService.saveQuestion(1L, 2L, question.getId());
+        AnswerEntity answer = homeConverter.sendQuestionAnswer(homeService.makeSendQuestion(1L, 2L, question.getId()));
+        homeService.saveQuestion(answer);
     }
 }
