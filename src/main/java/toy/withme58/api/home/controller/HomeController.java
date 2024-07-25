@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import toy.withme58.api.common.annotation.MemberSession;
 import toy.withme58.api.common.api.Api;
 import toy.withme58.api.home.business.HomeBusiness;
+import toy.withme58.api.home.dto.request.SendQuestionRequestDto;
 import toy.withme58.api.home.dto.response.HomeFriendResponse;
 import toy.withme58.api.home.dto.response.HomeResponse;
+import toy.withme58.api.home.dto.response.SendQuestionResponse;
 import toy.withme58.api.member.dto.Member;
 
 @RequiredArgsConstructor
@@ -31,5 +33,16 @@ public class HomeController {
             @MemberSession Member member) {
         HomeFriendResponse homeFriendResponse = homeBusiness.friendResponse(member.getId());
         return Api.OK(homeFriendResponse);
+    }
+
+    @PostMapping("/myfriends")
+    public Api<SendQuestionResponse> sendQuestion(
+            @Parameter(hidden = true)
+            @MemberSession Member member,
+            @RequestBody SendQuestionRequestDto requestDto
+    ) {
+        SendQuestionResponse sendQuestionResponse = homeBusiness
+                .sendQuestionResponse(requestDto.getFriendName(), member.getId(), requestDto.getQuestionId());
+        return Api.OK(sendQuestionResponse);
     }
 }

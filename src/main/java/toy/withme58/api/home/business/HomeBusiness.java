@@ -3,10 +3,9 @@ package toy.withme58.api.home.business;
 import lombok.RequiredArgsConstructor;
 import toy.withme58.api.common.annotation.Business;
 import toy.withme58.api.home.converter.HomeConverter;
-import toy.withme58.api.home.dto.response.HomeFriendResponse;
-import toy.withme58.api.home.dto.response.HomeResponse;
-import toy.withme58.api.home.dto.response.MemberFriendDto;
+import toy.withme58.api.home.dto.response.*;
 import toy.withme58.api.home.service.HomeService;
+import toy.withme58.db.answer.AnswerEntity;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.member.MemberRepository;
 
@@ -31,5 +30,16 @@ public class HomeBusiness {
     public HomeFriendResponse friendResponse(Long memberId) {
         List<MemberFriendDto> memberFriendEntity = homeService.findMemberFriendEntity(memberId);
         return homeConverter.friendResponse(memberFriendEntity);
+    }
+
+    public SendQuestionResponse sendQuestionResponse(String friendName, Long memberId, Long questionId) {
+        Long receiverId = homeService.findReceiverIdByFriendName(friendName);
+        Long senderId = homeService.findSenderId(memberId);
+
+        SendQuestionDto sendQuestionDto = homeService.makeSendQuestion(senderId, receiverId, questionId);
+        AnswerEntity answer = homeConverter.sendQuestionAnswer(sendQuestionDto);
+
+        homeService.saveQuestion(answer); //DB에 저장 수행
+        return homeConverter.sendQuestionResponse();
     }
 }
