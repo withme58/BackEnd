@@ -9,7 +9,6 @@ import toy.withme58.api.home.dto.response.MemberFriendDto;
 import toy.withme58.api.home.dto.response.SendQuestionDto;
 import toy.withme58.db.answer.AnswerEntity;
 import toy.withme58.db.answer.AnswerRepository;
-import toy.withme58.db.answer.enums.AnswerStatus;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.member.MemberRepository;
 import toy.withme58.db.memberfriend.MemberFriendRepository;
@@ -33,7 +32,6 @@ public class HomeService {
     private final QuestionRepository questionRepository;
     private final MemberFriendRepository memberFriendRepository;
     private final AnswerRepository answerRepository;
-    private final HomeConverter homeConverter;
 
     public String findQuestion(Long memberId) {
         Random random = new Random();
