@@ -81,15 +81,11 @@ public class HomeService {
         return member.getId();
     }
 
-    public void saveQuestion(Long senderId, Long receiverId, Long questionId) {
-        SendQuestionDto sendQuestionDto = makeSendQuestion(senderId, receiverId, questionId);
-
-        AnswerEntity answer = homeConverter.sendQuestionAnswer(sendQuestionDto);
-
+    public void saveQuestion(AnswerEntity answer) {
         answerRepository.save(answer);
     }
 
-    private SendQuestionDto makeSendQuestion(Long senderId, Long receiverId, Long questionId) {
+    public SendQuestionDto makeSendQuestion(Long senderId, Long receiverId, Long questionId) {
         QuestionEntity question = questionRepository.findById(questionId)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
 
