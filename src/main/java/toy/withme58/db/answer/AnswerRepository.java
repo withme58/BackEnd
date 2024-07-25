@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface AnswerRepository extends JpaRepository<AnswerEntity,Long> {
+public interface AnswerRepository extends JpaRepository<AnswerEntity, Long> {
 
     //생성 조회 삭제
 
@@ -15,8 +15,8 @@ public interface AnswerRepository extends JpaRepository<AnswerEntity,Long> {
 
     //memberId와 questionId 를 받은경우 상세 조회
     //select * from answer where receiverId = ? and questionId = ? order by id desc
-    Optional<AnswerEntity> findFirstByReceiverIdAndQuestionIdOrderByIdDesc(Long receiverId , Long questionId);
+    Optional<AnswerEntity> findFirstByReceiverIdAndQuestionIdOrderByIdDesc(Long receiverId, Long questionId);
 
-
+    List<AnswerEntity> findAllByReceiverId(Long receiverId);
 
 }

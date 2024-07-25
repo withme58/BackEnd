@@ -1,13 +1,25 @@
 package toy.withme58.api.qustion.controller;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import toy.withme58.api.common.annotation.MemberSession;
+import toy.withme58.api.common.api.Api;
+import toy.withme58.api.member.dto.Member;
+import toy.withme58.api.qustion.dto.response.MyQuestionResponse;
 
 @RequiredArgsConstructor
 @RequestMapping("/question")
 @RestController
 public class QuestionController {
-    
+
+    @GetMapping
+    public Api<MyQuestionResponse> myQuestion(
+            @Parameter(hidden = true)
+            @MemberSession Member member) {
+
+        return null;
+    }
 }

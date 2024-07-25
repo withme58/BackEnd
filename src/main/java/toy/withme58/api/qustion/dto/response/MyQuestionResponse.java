@@ -8,7 +8,7 @@ import java.util.List;
 
 @Builder
 @Getter
-public class MyQuestionDto {
+public class MyQuestionResponse {
 
     private List<QuestionsDto> question;
     private String status;
