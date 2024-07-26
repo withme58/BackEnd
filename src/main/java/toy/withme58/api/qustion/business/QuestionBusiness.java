@@ -35,6 +35,6 @@ public class QuestionBusiness {
     public SendingAnswerResponse sendingAnswer(SendingAnswerRequest request) {//senderId는 질문한사람!!답변은 받는 것
         questionService.updateAnswer(request.getAnswerId(), request.getAnswer());
         AnswerEntity answerEntity = questionService.findAnswerById(request.getAnswerId());
-        return null;
+        return questionConverter.sendingAnswerResponse(answerEntity);
     }
 }
