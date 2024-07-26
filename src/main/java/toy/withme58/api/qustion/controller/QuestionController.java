@@ -27,10 +27,8 @@ public class QuestionController {
     }
 
     @PostMapping
-    public Api<SendingAnswerResponse> sendingAnswer(
-            @Parameter(hidden = true)
-            @MemberSession Member member,
-            @RequestBody SendingAnswerRequest request) {
-        return null;
+    public Api<SendingAnswerResponse> sendingAnswer(@RequestBody SendingAnswerRequest request) {
+        SendingAnswerResponse sendingAnswerResponse = questionBusiness.sendingAnswer(request);
+        return Api.OK(sendingAnswerResponse);
     }
 }
