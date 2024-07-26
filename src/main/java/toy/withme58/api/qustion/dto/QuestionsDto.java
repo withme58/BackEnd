@@ -9,4 +9,5 @@ public class QuestionsDto {
     private String questionName;
     private String friendName;
     private Long friendId;
+    private Long answerId;
 }

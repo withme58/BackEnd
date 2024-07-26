@@ -1,6 +1,7 @@
 package toy.withme58.db.answer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,5 +19,4 @@ public interface AnswerRepository extends JpaRepository<AnswerEntity, Long> {
     Optional<AnswerEntity> findFirstByReceiverIdAndQuestionIdOrderByIdDesc(Long receiverId, Long questionId);
 
     List<AnswerEntity> findAllByReceiverId(Long receiverId);
-
 }

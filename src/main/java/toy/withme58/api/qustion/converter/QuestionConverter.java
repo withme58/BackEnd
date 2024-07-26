@@ -13,7 +13,8 @@ public class QuestionConverter {
 
     public QuestionsDto questionsDto(String questionTitle, String senderName, AnswerEntity question) {
         return QuestionsDto.builder().questionName(questionTitle)
-                .friendName(senderName).friendId(question.getId()).build();
+                .friendName(senderName).friendId(question.getSenderId()).answerId(question.getId())
+                .build();
     }
 
     public MyQuestionResponse questionResponse(List<QuestionsDto> questions) {

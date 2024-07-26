@@ -5,6 +5,7 @@ import toy.withme58.api.common.annotation.Business;
 import toy.withme58.api.qustion.converter.QuestionConverter;
 import toy.withme58.api.qustion.dto.QuestionsDto;
 import toy.withme58.api.qustion.dto.response.MyQuestionResponse;
+import toy.withme58.api.qustion.dto.response.SendingAnswerResponse;
 import toy.withme58.api.qustion.service.QuestionService;
 import toy.withme58.db.answer.AnswerEntity;
 
@@ -22,11 +23,15 @@ public class QuestionBusiness {
 
         List<QuestionsDto> questionsDto = questions.stream()
                 .map(q -> {
-                    String questionTitle = questionService.findQuestionTitle(q.getId());
+                    String questionTitle = questionService.findQuestionTitle(q.getQuestion().getId());
                     String senderName = questionService.findFriendNameBySenderId(q.getSenderId());
                     return questionConverter.questionsDto(questionTitle, senderName, q);
                 }).toList();
 
         return questionConverter.questionResponse(questionsDto);
+    }
+
+    public SendingAnswerResponse sendingAnswer(Long memberId, Long senderId) {//senderId는 질문한사람!!답변은 받는 것
+        return null;
     }
 }
