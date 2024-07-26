@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import toy.withme58.api.common.annotation.Business;
 import toy.withme58.api.qustion.converter.QuestionConverter;
 import toy.withme58.api.qustion.dto.QuestionsDto;
+import toy.withme58.api.qustion.dto.request.SendingAnswerRequest;
 import toy.withme58.api.qustion.dto.response.MyQuestionResponse;
 import toy.withme58.api.qustion.dto.response.SendingAnswerResponse;
 import toy.withme58.api.qustion.service.QuestionService;
@@ -31,7 +32,9 @@ public class QuestionBusiness {
         return questionConverter.questionResponse(questionsDto);
     }
 
-    public SendingAnswerResponse sendingAnswer(Long memberId, Long senderId) {//senderId는 질문한사람!!답변은 받는 것
+    public SendingAnswerResponse sendingAnswer(SendingAnswerRequest request) {//senderId는 질문한사람!!답변은 받는 것
+        questionService.updateAnswer(request.getAnswerId(), request.getAnswer());
+        AnswerEntity answerEntity = questionService.findAnswerById(request.getAnswerId());
         return null;
     }
 }
