@@ -35,9 +35,12 @@ public class HomeService {
 
     public String findQuestion(Long memberId) {
 
-//        LocalDate now = LocalDate.now();
-//        if (memberQuestionRepository.findByCreatedAt(now).isPresent()) {
-//        }
+        LocalDate now = LocalDate.now();
+        if (memberQuestionRepository.findByCreatedAt(now).isPresent()) {
+            MemberQuestionEntity memberQuestion = memberQuestionRepository.findByCreatedAt(now)
+                    .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+            return memberQuestion.getQuestion().getTitle();
+        }
 
         Random random = new Random();
 
@@ -57,7 +60,7 @@ public class HomeService {
     private void saveData(Long memberId, Long questionId) {
         MemberEntity member = memberRepository.findById(memberId).orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
         QuestionEntity question = questionRepository.findById(questionId).orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
-        LocalDateTime createAt = LocalDateTime.now();
+        LocalDate createAt = LocalDate.now();
 
         MemberQuestionEntity memberQuestionEntity = new MemberQuestionEntity(createAt, member, question);
         memberQuestionRepository.save(memberQuestionEntity);
