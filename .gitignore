@@ -105,7 +105,8 @@ Temporary Items
 /out/
 
 # Ignore application configuration files
-#application.yaml
+application.yaml
+build.gradle
 
 # Ignore IntelliJ IDEA project files
 /.idea/
@@ -116,11 +117,5 @@ Thumbs.db
 
 # Ignore build output directories
 target/
-
-# Ignore application configuration files
-application.yaml
-build.gradle
-
-
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,java

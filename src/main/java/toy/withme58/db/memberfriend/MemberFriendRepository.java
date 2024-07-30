@@ -11,7 +11,10 @@ import toy.withme58.db.memberfriend.enums.MemberFriendStatus;
 import java.util.List;
 import java.util.Optional;
 
+import java.util.List;
+
 public interface MemberFriendRepository extends JpaRepository<MemberFriendEntity,Long> {
+    List<MemberFriendEntity> findAllByFriendId(Long memberId);
 
     //생성 조회 삭제
 
@@ -25,6 +28,4 @@ public interface MemberFriendRepository extends JpaRepository<MemberFriendEntity
     //select * from member_friend where memberId = ? and friendId = ? and status = ?order by id desc limit 1
 
     Optional<MemberFriendEntity> findFirstByMemberIdAndFriendIdAndStatusOrderByIdDesc(Long memberId, Long friendId,MemberFriendStatus status);
-
-
 }
