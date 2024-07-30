@@ -6,7 +6,7 @@ import lombok.*;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.question.QuestionEntity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @Table(name = "member_question")
@@ -22,7 +22,7 @@ public class MemberQuestionEntity {
     private Long id;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @ManyToOne
     @JsonIgnore
@@ -36,7 +36,7 @@ public class MemberQuestionEntity {
     // memberquestion db createAt값이 있으면 다른 값 선정
 
 
-    public MemberQuestionEntity(LocalDateTime createdAt, MemberEntity member, QuestionEntity question) {
+    public MemberQuestionEntity(LocalDate createdAt, MemberEntity member, QuestionEntity question) {
         this.createdAt = createdAt;
         this.member = member;
         this.question = question;

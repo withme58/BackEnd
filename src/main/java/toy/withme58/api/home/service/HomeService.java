@@ -17,6 +17,7 @@ import toy.withme58.db.memberquestion.MemberQuestionRepository;
 import toy.withme58.db.question.QuestionEntity;
 import toy.withme58.db.question.QuestionRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
@@ -33,6 +34,11 @@ public class HomeService {
     private final AnswerRepository answerRepository;
 
     public String findQuestion(Long memberId) {
+
+//        LocalDate now = LocalDate.now();
+//        if (memberQuestionRepository.findByCreatedAt(now).isPresent()) {
+//        }
+
         Random random = new Random();
 
         List<Long> idxList = IntStream.rangeClosed(1, 10)
