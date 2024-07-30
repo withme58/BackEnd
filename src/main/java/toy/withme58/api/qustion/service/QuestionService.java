@@ -48,6 +48,7 @@ public class QuestionService {
         answer.setAnsweredAt(LocalDateTime.now());
         answer.setContent(answerContent);
         answer.setStatus(AnswerStatus.REGISTERED);
+        answerRepository.save(answer);
     }
 
     public AnswerEntity findAnswerById(Long answerId) {
