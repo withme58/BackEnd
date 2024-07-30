@@ -17,6 +17,7 @@ import toy.withme58.db.memberquestion.MemberQuestionRepository;
 import toy.withme58.db.question.QuestionEntity;
 import toy.withme58.db.question.QuestionRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
@@ -33,6 +34,14 @@ public class HomeService {
     private final AnswerRepository answerRepository;
 
     public String findQuestion(Long memberId) {
+
+        LocalDate now = LocalDate.now();
+        if (memberQuestionRepository.findByCreatedAt(now).isPresent()) { //현재 시간이 db에 존재하면
+            MemberQuestionEntity memberQuestion = memberQuestionRepository.findByCreatedAt(now)
+                    .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+            return memberQuestion.getQuestion().getTitle();
+        }
+
         Random random = new Random();
 
         List<Long> idxList = IntStream.rangeClosed(1, 10)
@@ -51,7 +60,7 @@ public class HomeService {
     private void saveData(Long memberId, Long questionId) {
         MemberEntity member = memberRepository.findById(memberId).orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
         QuestionEntity question = questionRepository.findById(questionId).orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
-        LocalDateTime createAt = LocalDateTime.now();
+        LocalDate createAt = LocalDate.now();
 
         MemberQuestionEntity memberQuestionEntity = new MemberQuestionEntity(createAt, member, question);
         memberQuestionRepository.save(memberQuestionEntity);

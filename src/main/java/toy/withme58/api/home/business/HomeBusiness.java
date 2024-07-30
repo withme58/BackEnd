@@ -21,9 +21,9 @@ public class HomeBusiness {
     private final MemberRepository memberRepository;
 
     public HomeResponse homeResponse(Long memberId) {
-        String question = homeService.findQuestion(memberId);
-        MemberEntity member = memberRepository.findById(memberId).get();
-        LocalDateTime createdAt = member.getCreatedAt();
+        String question = homeService.findQuestion(memberId); //질문내용
+        MemberEntity member = memberRepository.findById(memberId).get(); //멤버 조회
+        LocalDateTime createdAt = member.getCreatedAt(); //멤버 가입한 시기
         return homeConverter.homeResponse(question, createdAt);
     }
 
