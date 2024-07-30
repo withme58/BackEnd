@@ -11,7 +11,7 @@ import toy.withme58.db.member.MemberRepository;
 import toy.withme58.db.question.QuestionEntity;
 import toy.withme58.db.question.QuestionRepository;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -40,5 +40,17 @@ public class QuestionService {
     public String findFriendNameBySenderId(Long senderId) {
         return memberRepository.findById(senderId)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT)).getName();
+    }
+
+    public void updateAnswer(Long answerId, String answerContent) {
+        AnswerEntity answer = answerRepository.findById(answerId)
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+        answer.setAnsweredAt(LocalDateTime.now());
+        answer.setContent(answerContent);
+        answer.setStatus(AnswerStatus.REGISTERED);
+    }
+
+    public AnswerEntity findAnswerById(Long answerId) {
+        return answerRepository.findById(answerId).orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
     }
 }
