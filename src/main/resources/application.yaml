@@ -7,7 +7,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://yonombara.cdq4ig8g6m6j.ap-northeast-2.rds.amazonaws.com:3306/yonombara
+    url: jdbc:mysql://yonombara.cloyi6mws20s.ap-northeast-2.rds.amazonaws.com:3306/yonombara
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: yonombara
     password: yonombara
