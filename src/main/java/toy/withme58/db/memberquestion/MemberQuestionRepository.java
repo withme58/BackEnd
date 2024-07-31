@@ -9,5 +9,5 @@ public interface MemberQuestionRepository extends JpaRepository<MemberQuestionEn
 
     Optional<MemberQuestionEntity> findByMemberIdAndQuestionId(Long memberId, Long questionId);
 
-    Optional<MemberQuestionEntity> findByCreatedAt(LocalDate now);
+    Optional<MemberQuestionEntity> findByCreatedAtAndMemberId(LocalDate now, Long memberId);
 }
