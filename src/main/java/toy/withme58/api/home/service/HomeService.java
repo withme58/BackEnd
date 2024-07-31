@@ -36,8 +36,8 @@ public class HomeService {
     public String findQuestion(Long memberId) {
 
         LocalDate now = LocalDate.now();
-        if (memberQuestionRepository.findByCreatedAt(now).isPresent()) { //현재 시간이 db에 존재하면
-            MemberQuestionEntity memberQuestion = memberQuestionRepository.findByCreatedAt(now)
+        if (memberQuestionRepository.findByCreatedAtAndMemberId(now, memberId).isPresent()) { //현재 시간이 db에 존재하면
+            MemberQuestionEntity memberQuestion = memberQuestionRepository.findByCreatedAtAndMemberId(now, memberId)
                     .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
             return memberQuestion.getQuestion().getTitle();
         }
