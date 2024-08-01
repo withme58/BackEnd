@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import toy.withme58.api.answer.business.AnswerBusiness;
+import toy.withme58.api.answer.dto.response.AnswerInfoResponse;
 import toy.withme58.api.answer.dto.response.AnswerResponse;
 import toy.withme58.api.common.annotation.MemberSession;
 import toy.withme58.api.common.api.Api;
@@ -32,13 +33,13 @@ public class AnswerApiController {
     }
 
     @GetMapping("/one")
-    public Api<AnswerResponse> showOne(
+    public Api<AnswerInfoResponse> showOne(
             @Parameter(hidden = true)
             @MemberSession Member member,
 
             @RequestParam("questionId") Long questionId
     ){
-        AnswerResponse response = answerBusiness.getOneByQuestionId(member,questionId);
+        AnswerInfoResponse response = answerBusiness.getOneByQuestionId(member,questionId);
 
         return Api.OK(response);
     }

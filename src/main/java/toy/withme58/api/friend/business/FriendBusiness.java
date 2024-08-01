@@ -18,7 +18,10 @@ import toy.withme58.api.memberfriend.converter.MemberFriendConverter;
 import toy.withme58.api.memberfriend.dto.response.MemberFriendResponse;
 import toy.withme58.api.memberfriend.service.MemberFriendService;
 import toy.withme58.db.member.MemberEntity;
+import toy.withme58.db.memberfriend.MemberFriendEntity;
 import toy.withme58.db.memberfriend.enums.MemberFriendStatus;
+
+import java.time.LocalDateTime;
 
 @Business
 @RequiredArgsConstructor
@@ -96,7 +99,20 @@ public class FriendBusiness {
 
         memberFriendService.statusRegistered(memberFriendEntity);
 
+        swapMemberFriendId(memberFriendEntity);
+
         return friendConverter.toResponse(friendEntity);
+    }
+
+    private void swapMemberFriendId(MemberFriendEntity entity){
+        var member = memberService.getMember(entity.getFriend().getId());
+        var friend = friendService.searchOne(entity.getMember().getId());
+
+
+        var newEntity = memberFriendConverter.toEntity(member,friend);
+        newEntity.setCreatedAt(entity.getCreatedAt());
+        memberFriendService.swapCreate(newEntity);
+
     }
 
     public FriendResponse rejectFriend(Long friendId, Member member) {
@@ -136,7 +152,7 @@ public class FriendBusiness {
         }
 
         memberEntity.getMemberFriendList().stream()
-                .filter(it -> it.getStatus() == MemberFriendStatus.REGISTERED)
+                .filter(it -> it.getStatus() == MemberFriendStatus.REGISTERED || it.getStatus() == MemberFriendStatus.WAITING)
                 .forEach(it -> {
                     if (it.getFriend().getName().equals(friendName)) {
                         throw new ApiException(MemberErrorCode.Member_Friend_Duplicate);
@@ -148,9 +164,12 @@ public class FriendBusiness {
 
         var friendEntity = friendService.searchOne(friendId);
 
+
         var memberFriendEntity = memberFriendService.searchOneRegistered(member.getId(),friendEntity.getId());
+        var memberFriendEntityOther = memberFriendService.searchOneRegistered(friendEntity.getId(),member.getId());
 
         memberFriendService.statusDeleted(memberFriendEntity);
+        memberFriendService.statusDeleted(memberFriendEntityOther);
     }
 
 }

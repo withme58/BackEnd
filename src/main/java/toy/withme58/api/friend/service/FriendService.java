@@ -42,5 +42,4 @@ public class FriendService {
         var friendEntity = friendRepository.findFirstByNameAndStatusOrderByIdDesc(name, FriendStatus.REGISTERED);
         return friendEntity.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "해당 유저는 탈퇴했거나 없습니다"));
     }
-
 }

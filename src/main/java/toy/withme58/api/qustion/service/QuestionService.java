@@ -32,6 +32,11 @@ public class QuestionService {
                 .toList();
     }
 
+    public QuestionEntity findQuestionById(Long questionId){
+        return questionRepository.findFirstByIdAndStatusOrderById(questionId,AnswerStatus.REGISTERED)
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+    }
+
     public String findQuestionTitle(Long questionId) {
         return questionRepository.findById(questionId)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT)).getTitle();

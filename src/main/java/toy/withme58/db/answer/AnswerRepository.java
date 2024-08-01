@@ -17,7 +17,7 @@ public interface AnswerRepository extends JpaRepository<AnswerEntity, Long> {
 
     //memberId와 questionId 를 받은경우 상세 조회
     //select * from answer where receiverId = ? and questionId = ? order by id desc
-    Optional<AnswerEntity> findFirstBySenderIdAndQuestionIdOrderByIdDesc(Long senderId, Long questionId);
+    Optional<AnswerEntity> findFirstBySenderIdAndQuestionIdAndContentIsNotNullOrderByIdDesc(Long senderId, Long questionId);
 
     List<AnswerEntity> findAllByReceiverId(Long receiverId);
 
@@ -26,5 +26,7 @@ public interface AnswerRepository extends JpaRepository<AnswerEntity, Long> {
 
     @Query("select a from AnswerEntity a where a.receiverId = :receiverId and a.content is not null")
     List<AnswerEntity> findByReceiverIdAndContentIsNotNull(@Param("receiverId") Long senderId);
+
+
 
 }

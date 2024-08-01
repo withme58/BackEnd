@@ -24,15 +24,17 @@ public class AnswerService {
 
     //*****조회******
     //전체조회
-    public List<AnswerEntity> getAllListByReceiverId(Long receiverId){
 
-        return answerRepository.findAllBySenderIdOrderByIdDesc(receiverId);
+
+    public List<AnswerEntity> getAllListBySenderId(Long senderId){
+
+        return answerRepository.findAllBySenderIdOrderByIdDesc(senderId);
     }
 
     //단일조회
-    public AnswerEntity getOneByReceiverIdAndQuestionId(Long receiverId, Long questionId){
+    public AnswerEntity getOneBySenderIdAndQuestionId(Long senderId, Long questionId){
 
-        return answerRepository.findFirstBySenderIdAndQuestionIdOrderByIdDesc(receiverId,questionId)
+        return answerRepository.findFirstBySenderIdAndQuestionIdAndContentIsNotNullOrderByIdDesc(senderId,questionId)
                 .orElseThrow(()->new ApiException(ErrorCode.NULL_POINT));
     }
 
