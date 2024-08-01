@@ -2,11 +2,17 @@ package toy.withme58.api.answer.business;
 
 import lombok.RequiredArgsConstructor;
 import toy.withme58.api.answer.converter.AnswerConverter;
+import toy.withme58.api.answer.dto.response.AnswerInfoResponse;
 import toy.withme58.api.answer.dto.response.AnswerResponse;
 import toy.withme58.api.answer.service.AnswerService;
 import toy.withme58.api.common.annotation.Business;
+import toy.withme58.api.common.annotation.MemberSession;
 import toy.withme58.api.member.dto.Member;
+import toy.withme58.api.member.service.MemberService;
+import toy.withme58.api.qustion.service.QuestionService;
+import toy.withme58.db.question.QuestionEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Business
@@ -16,23 +22,30 @@ public class AnswerBusiness {
     private final AnswerConverter answerConverter;
     private final AnswerService answerService;
 
+    private final MemberService memberService;
 
     public List<AnswerResponse> getAllList(Member member) {
 
-        var answerList = answerService.getAllListByReceiverId(member.getId());
+        var answerList = answerService.getAllListBySenderId(member.getId());
 
         var answerResponseList = answerList.stream()
-                .map(answerConverter::toResponse)
-                .toList();
+                .filter(it -> it.getContent() != null)
+                .map(it -> {
+                    var receiverName = memberService.getMember(it.getReceiverId()).getName();
+                    return answerConverter.toResponse(it.getQuestion(), receiverName, it.getCreatedAt());
+                }).toList();
 
         return answerResponseList;
     }
 
-    public AnswerResponse getOneByQuestionId(Member member, Long questionId) {
+    public AnswerInfoResponse getOneByQuestionId(Member member, Long questionId) {
 
-        var answerEntity = answerService.getOneByReceiverIdAndQuestionId(member.getId(),questionId);
+        var answerEntity = answerService.getOneBySenderIdAndQuestionId(member.getId(), questionId);
 
-        var answerResponse = answerConverter.toResponse(answerEntity);
+        var receiverName = memberService.getMember(answerEntity.getReceiverId()).getName();
+        var senderName = memberService.getMember(answerEntity.getSenderId()).getName();
+
+        var answerResponse = answerConverter.toResponse(answerEntity,receiverName,senderName);
 
         return answerResponse;
     }
