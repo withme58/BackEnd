@@ -2,6 +2,7 @@ package toy.withme58.api.member.business;
 
 
 import lombok.RequiredArgsConstructor;
+import toy.withme58.api.answer.service.AnswerService;
 import toy.withme58.api.common.annotation.Business;
 import toy.withme58.api.common.error.ErrorCode;
 import toy.withme58.api.common.error.MemberErrorCode;
@@ -26,7 +27,7 @@ public class MemberBusiness {
 
    private final FriendBusiness friendBusiness;
 
-
+    private final AnswerService answerService;
     /*
     * 1. request -> entity  로 변환
     * 2. entity -> service를 호출하여 저장
@@ -49,8 +50,6 @@ public class MemberBusiness {
         return response;
     }
 
-
-
     public TokenResponse login(MemberLoginRequest request) {
         var userEntity = memberService.login(request.getEmail(),request.getPassword());
 
@@ -65,7 +64,12 @@ public class MemberBusiness {
     public MemberResponse me(Long userId) {
 
         var entity = memberService.getMember(userId);
-        var response = memberConverter.toMemberResponse(entity);
+
+        var senderAnswerList = answerService.getAllListBySenderIdAndIsNotNull(entity.getId());
+
+        var receiverAnswerList = answerService.getAllListByReceiverIdAndIsNotNull(entity.getId());
+
+        var response = memberConverter.toMemberResponse(entity,senderAnswerList.size(),receiverAnswerList.size());
         return response;
     }
 
@@ -73,9 +77,7 @@ public class MemberBusiness {
 
         var memberByNameEntity = memberService.getMemberByNameWithThrow(request.getName());
 
-
         var memberByEmailEntity = memberService.getMemberByEmailWithThrow(request.getEmail());
-
 
 
         //TODO 멤버 이름이나 이메일이 같으면 예외를 발생시키는데

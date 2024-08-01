@@ -32,7 +32,6 @@ public class AnswerEntity {
     @Column(nullable = false)
     private Long receiverId;
 
-    @Column(columnDefinition = "TEXT")
     private String content;
 
     @Column(columnDefinition = "varchar(50)", nullable = false)

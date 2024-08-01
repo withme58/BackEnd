@@ -27,7 +27,6 @@ public class FriendEntity {
     @Email
     private String email;
 
-
     @Column(length =50, nullable =false)
     private String name;
 
