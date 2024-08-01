@@ -27,7 +27,22 @@ public class MemberFriendService {
         return Optional.ofNullable(memberFriendEntity)
                 .map(it->{
                     it.setCreatedAt(LocalDateTime.now());
-                    it.setStatus(MemberFriendStatus.WAITING);
+
+                     it.setStatus(MemberFriendStatus.WAITING);
+
+                    return memberFriendRepository.save(it);
+                })
+                .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
+    }
+
+    public MemberFriendEntity swapCreate(
+            MemberFriendEntity memberFriendEntity
+    ){
+        return Optional.ofNullable(memberFriendEntity)
+                .map(it->{
+
+                    it.setRegisteredAt(LocalDateTime.now());
+                    it.setStatus(MemberFriendStatus.REGISTERED);
                     return memberFriendRepository.save(it);
                 })
                 .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
