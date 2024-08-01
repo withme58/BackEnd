@@ -16,13 +16,13 @@ import toy.withme58.api.member.dto.response.MemberResponse;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/open-api/member")
+@RequestMapping("/open-api")
 public class MemberOpenApiController {
 
     private final MemberBusiness memberBusiness;
 
 
-    @PostMapping("/register")
+    @PostMapping("/signup")
     public Api<MemberResponse> register(
             @Valid
             @RequestBody MemberRegisterRequest memberRegisterRequest
@@ -33,7 +33,7 @@ public class MemberOpenApiController {
         return Api.OK(response);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/signin")
     public Api<Object> login(
             @Valid
             @RequestBody MemberLoginRequest memberLoginRequest

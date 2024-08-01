@@ -15,7 +15,7 @@ import toy.withme58.api.member.dto.Member;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/answer")
 @RequiredArgsConstructor
 public class AnswerApiController {
 

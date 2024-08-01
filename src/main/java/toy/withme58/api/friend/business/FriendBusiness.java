@@ -55,7 +55,7 @@ public class FriendBusiness {
         var friendResponseList = memberFriendList.stream()
                 .filter(it-> it.getStatus()==MemberFriendStatus.REGISTERED)
                 .map(it->{
-                    return friendConverter.toResponseByMember(it.getMember());
+                    return friendConverter.toResponseByMember(it.getMember(),MemberFriendStatus.REGISTERED);
                 })
                 .toList();
 
@@ -76,7 +76,7 @@ public class FriendBusiness {
         var friendResponseList = memberFriendList.stream()
                 .filter(it->it.getStatus()==MemberFriendStatus.WAITING)
                 .map(it->{
-                   return friendConverter.toResponseByMember(it.getMember());
+                   return friendConverter.toResponseByMember(it.getMember(),MemberFriendStatus.WAITING);
                 })
                 .toList();
 
@@ -90,7 +90,6 @@ public class FriendBusiness {
 
     public FriendResponse acceptFriend(Long friendId , Member member) {
 
-
         var friendEntity = friendService.searchOne(friendId);
 
         var memberFriendEntity = memberFriendService.searchOneWaiting(member.getId(),friendEntity.getId());
@@ -99,6 +98,18 @@ public class FriendBusiness {
 
         return friendConverter.toResponse(friendEntity);
     }
+
+    public FriendResponse rejectFriend(Long friendId, Member member) {
+
+        var friendEntity = friendService.searchOne(friendId);
+
+        var memberFriendEntity = memberFriendService.searchOneWaiting(member.getId(),friendEntity.getId());
+
+        memberFriendService.statusUnRegistered(memberFriendEntity);
+
+        return friendConverter.toResponse(friendEntity,MemberFriendStatus.UNREGISTERED);
+    }
+
 
 
     public MemberFriendResponse requestFriend(FriendAcceptRequest request, Member member) {
@@ -139,7 +150,7 @@ public class FriendBusiness {
 
         var memberFriendEntity = memberFriendService.searchOneRegistered(member.getId(),friendEntity.getId());
 
-        memberFriendService.statusUnRegistered(memberFriendEntity);
+        memberFriendService.statusDeleted(memberFriendEntity);
     }
 
 }

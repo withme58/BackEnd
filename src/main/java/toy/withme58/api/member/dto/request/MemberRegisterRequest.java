@@ -3,6 +3,7 @@ package toy.withme58.api.member.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class MemberRegisterRequest {
 
     @NotBlank
+    @Size(max=10)
     private String name;
 
     @NotBlank
@@ -20,6 +22,7 @@ public class MemberRegisterRequest {
     private String email;
 
     @NotBlank
+    @Size(min=8)
     private String password;
 
 }

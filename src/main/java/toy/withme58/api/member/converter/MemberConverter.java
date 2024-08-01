@@ -26,6 +26,7 @@ public class MemberConverter {
 
     }
 
+
     public MemberResponse toMemberResponse(MemberEntity memberEntity){
         return Optional.ofNullable(memberEntity)
                 .map(it->{
