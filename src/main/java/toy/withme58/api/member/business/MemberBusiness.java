@@ -65,11 +65,7 @@ public class MemberBusiness {
 
         var entity = memberService.getMember(userId);
 
-        var senderAnswerList = answerService.getAllListBySenderIdAndIsNotNull(entity.getId());
-
-        var receiverAnswerList = answerService.getAllListByReceiverIdAndIsNotNull(entity.getId());
-
-        var response = memberConverter.toMemberResponse(entity,senderAnswerList.size(),receiverAnswerList.size());
+        var response = memberConverter.toMemberResponse(entity);
         return response;
     }
 
