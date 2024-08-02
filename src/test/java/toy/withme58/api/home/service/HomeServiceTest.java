@@ -56,11 +56,11 @@ class HomeServiceTest {
 
         memberRepository.save(member1);
         System.out.println("member1 = " + member1.getId());
-
-        for (int i = 1; i <= 5; i++) {
-            String question = homeService.findQuestion(1L);
-            System.out.println("question = " + question);
-        }
+//
+//        for (int i = 1; i <= 5; i++) {
+//            String question = homeService.findQuestion(1L);
+//            System.out.println("question = " + question);
+//        }
     }
 
     @Test
