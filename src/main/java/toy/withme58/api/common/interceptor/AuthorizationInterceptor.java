@@ -40,21 +40,25 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        var accessToken = request.getHeader("authorization-token");
-        if(accessToken==null){
+        String authorizationHeader = request.getHeader("authorization-token");
+
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
             throw new ApiException(TokenErrorCode.AUTHORIZATION_TOKEN_NOT_FOUND);
         }
 
-        var memberId = tokenBusiness.validationToken(accessToken);
+        // "Bearer " 부분을 제거하고 실제 토큰만 추출
+        String accessToken = authorizationHeader.substring(7);
 
-        if(memberId!=null){
+        // 토큰 검증
+        Long memberId = tokenBusiness.validationToken(accessToken);
 
+        if (memberId != null) {
             var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
-            requestContext.setAttribute("memberId",memberId, RequestAttributes.SCOPE_REQUEST);
+            requestContext.setAttribute("memberId", memberId, RequestAttributes.SCOPE_REQUEST);
             return true;
         }
 
-        throw new ApiException(ErrorCode.BAD_REQUEST,"인증실패");
+        throw new ApiException(ErrorCode.BAD_REQUEST, "인증 실패");
 
     }
 }
