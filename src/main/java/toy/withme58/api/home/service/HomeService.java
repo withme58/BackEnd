@@ -1,6 +1,7 @@
 package toy.withme58.api.home.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import toy.withme58.api.common.error.ErrorCode;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class HomeService {
@@ -34,16 +36,15 @@ public class HomeService {
     private final MemberFriendRepository memberFriendRepository;
     private final AnswerRepository answerRepository;
 
-    @Transactional
     public String findQuestion(Long memberId) {
 
         LocalDate now = LocalDate.now();
-        if (memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId).isPresent()) { //현재 시간이 db에 존재하면
+        if (memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId).isPresent()) {//현재 시간이 db에 존재하면
+            log.info("질문 이미 받았습니다");
             MemberQuestionEntity memberQuestion = memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId)
                     .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
             return memberQuestion.getQuestion().getTitle();
         } else {
-
             Random random = new Random();
 
             List<Long> idxList = IntStream.rangeClosed(1, 10)
@@ -70,7 +71,6 @@ public class HomeService {
         memberQuestionRepository.save(memberQuestionEntity);
     }
 
-    @Transactional
     public List<MemberFriendDto> findMemberFriendEntity(Long memberId) {
         return memberFriendRepository.findAllByFriendId(memberId).stream()
                 .filter(memberFriendEntity -> memberFriendEntity.getStatus() == MemberFriendStatus.REGISTERED)
@@ -80,7 +80,6 @@ public class HomeService {
                 .toList();
     }
 
-    @Transactional
     public Long findReceiverIdByFriendName(String friendName) {
         MemberEntity member = memberRepository.findByName(friendName)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
