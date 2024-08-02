@@ -22,6 +22,7 @@ import toy.withme58.db.question.QuestionRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -39,7 +40,9 @@ public class HomeService {
     public String findQuestion(Long memberId) {
 
         LocalDate now = LocalDate.now();
-        if (memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId).isPresent()) {//현재 시간이 db에 존재하면
+
+        Optional<MemberQuestionEntity> memberQuestionById = memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId);
+        if (memberQuestionById.isPresent()) {//현재 시간이 db에 존재하면
             log.info("질문 이미 받았습니다");
             MemberQuestionEntity memberQuestion = memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId)
                     .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
