@@ -24,12 +24,12 @@ public class HomeBusiness {
     private final MemberRepository memberRepository;
 
     public HomeResponse homeResponse(Long memberId) {
-        String question = homeService.findQuestion(memberId); //질문내용
-        QuestionEntity questionEntity = homeService.findQuestionId(question);
+        QuestionEntity question = homeService.findQuestion(memberId); //질문내용
+//        QuestionEntity questionEntity = homeService.findQuestionId(question);
         MemberEntity member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT)); //멤버 조회
         LocalDateTime createdAt = member.getCreatedAt(); //멤버 가입한 시기
-        return homeConverter.homeResponse(questionEntity, createdAt);
+        return homeConverter.homeResponse(question, createdAt);
     }
 
     public HomeFriendResponse friendResponse(Long memberId) {

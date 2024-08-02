@@ -37,7 +37,7 @@ public class HomeService {
     private final MemberFriendRepository memberFriendRepository;
     private final AnswerRepository answerRepository;
 
-    public String findQuestion(Long memberId) {
+    public QuestionEntity findQuestion(Long memberId) {
 
 //        LocalDate now = LocalDate.now();
 //
@@ -45,7 +45,7 @@ public class HomeService {
 //        if (memberQuestionById.isPresent()) {//현재 시간이 db에 존재하면
 //            log.info("질문 이미 받았습니다");
 //            MemberQuestionEntity memberQuestion = memberQuestionById.get();
-//            return memberQuestion.getQuestion().getTitle();
+//            return memberQuestion.getQuestion();
 //        } else {
 //            Random random = new Random();
 //
@@ -59,7 +59,7 @@ public class HomeService {
 //
 //            saveData(memberId, questionId);
 //
-//            return questionRepository.findById(questionId).get().getTitle();
+//            return questionRepository.findById(questionId).get();
 //        }
         Random random = new Random();
 
@@ -73,7 +73,7 @@ public class HomeService {
 
         saveData(memberId, questionId);
 
-        return questionRepository.findById(questionId).get().getTitle();
+        return questionRepository.findById(questionId).get();
     }
 
     public QuestionEntity findQuestionId(String questionTitle) {
