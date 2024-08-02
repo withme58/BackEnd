@@ -40,21 +40,22 @@ public class HomeService {
             MemberQuestionEntity memberQuestion = memberQuestionRepository.findByCreatedAtAndMemberId(now, memberId)
                     .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
             return memberQuestion.getQuestion().getTitle();
+        } else {
+
+            Random random = new Random();
+
+            List<Long> idxList = IntStream.rangeClosed(1, 10)
+                    .filter(i -> memberQuestionRepository.findByMemberIdAndQuestionId(memberId, (long) i).isEmpty())
+                    .mapToObj(Long::valueOf)
+                    .toList();
+
+            int randomIdx = random.nextInt(idxList.size());
+            Long questionId = idxList.get(randomIdx);
+
+            saveData(memberId, questionId);
+
+            return questionRepository.findById(questionId).get().getTitle();
         }
-
-        Random random = new Random();
-
-        List<Long> idxList = IntStream.rangeClosed(1, 10)
-                .filter(i -> memberQuestionRepository.findByMemberIdAndQuestionId(memberId, (long) i).isEmpty())
-                .mapToObj(Long::valueOf)
-                .toList();
-
-        int randomIdx = random.nextInt(idxList.size());
-        Long questionId = idxList.get(randomIdx);
-
-        saveData(memberId, questionId);
-
-        return questionRepository.findById(questionId).get().getTitle();
     }
 
     private void saveData(Long memberId, Long questionId) {
