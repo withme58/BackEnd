@@ -44,8 +44,7 @@ public class HomeService {
         Optional<MemberQuestionEntity> memberQuestionById = memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId);
         if (memberQuestionById.isPresent()) {//현재 시간이 db에 존재하면
             log.info("질문 이미 받았습니다");
-            MemberQuestionEntity memberQuestion = memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId)
-                    .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
+            MemberQuestionEntity memberQuestion = memberQuestionById.get();
             return memberQuestion.getQuestion().getTitle();
         } else {
             Random random = new Random();
