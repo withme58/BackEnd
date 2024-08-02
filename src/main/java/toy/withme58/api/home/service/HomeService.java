@@ -36,8 +36,8 @@ public class HomeService {
     public String findQuestion(Long memberId) {
 
         LocalDate now = LocalDate.now();
-        if (memberQuestionRepository.findByCreatedAtAndMemberId(now, memberId).isPresent()) { //현재 시간이 db에 존재하면
-            MemberQuestionEntity memberQuestion = memberQuestionRepository.findByCreatedAtAndMemberId(now, memberId)
+        if (memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId).isPresent()) { //현재 시간이 db에 존재하면
+            MemberQuestionEntity memberQuestion = memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId)
                     .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
             return memberQuestion.getQuestion().getTitle();
         } else {
@@ -45,7 +45,7 @@ public class HomeService {
             Random random = new Random();
 
             List<Long> idxList = IntStream.rangeClosed(1, 10)
-                    .filter(i -> memberQuestionRepository.findByMemberIdAndQuestionId(memberId, (long) i).isEmpty())
+                    .filter(i -> memberQuestionRepository.findFirstByMemberIdAndQuestionId(memberId, (long) i).isEmpty())
                     .mapToObj(Long::valueOf)
                     .toList();
 
