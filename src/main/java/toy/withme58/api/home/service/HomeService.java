@@ -60,8 +60,7 @@ public class HomeService {
             return questionRepository.findById(questionId).get().getTitle();
         }
     }
-
-    @Transactional
+    
     public void saveData(Long memberId, Long questionId) {
         MemberEntity member = memberRepository.findById(memberId).orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
         QuestionEntity question = questionRepository.findById(questionId).orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
@@ -86,19 +85,16 @@ public class HomeService {
         return member.getId();
     }
 
-    @Transactional
     public Long findSenderId(Long memberId) {
         MemberEntity member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
         return member.getId();
     }
 
-    @Transactional
     public void saveQuestion(AnswerEntity answer) {
         answerRepository.save(answer);
     }
 
-    @Transactional
     public SendQuestionDto makeSendQuestion(Long senderId, Long receiverId, Long questionId) {
         QuestionEntity question = questionRepository.findById(questionId)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
