@@ -76,6 +76,11 @@ public class HomeService {
         return questionRepository.findById(questionId).get().getTitle();
     }
 
+    public QuestionEntity findQuestionId(String questionTitle) {
+        return questionRepository.findFirstByTitle(questionTitle)
+                .orElseThrow(() -> new ApiException((ErrorCode.NULL_POINT)));
+    }
+
     @Transactional
     public void saveData(Long memberId, Long questionId) {
         MemberEntity member = memberRepository.findById(memberId).orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
