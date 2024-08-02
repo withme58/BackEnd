@@ -36,7 +36,7 @@ public class MemberBusiness {
 
     public MemberResponse register(MemberRegisterRequest memberRegisterRequest){
 
-       // validateDuplicate(memberRegisterRequest);
+        validateDuplicate(memberRegisterRequest);
 
         var entity = memberConverter.toMemberEntity(memberRegisterRequest);
 
@@ -75,13 +75,12 @@ public class MemberBusiness {
 
         var memberByEmailEntity = memberService.getMemberByEmailWithThrow(request.getEmail());
 
-
-        //TODO 멤버 이름이나 이메일이 같으면 예외를 발생시키는데
-        //TODO 예외를 발생시키는 경우 대처도 백엔드가 해야 되나?
-        if(memberByNameEntity!=null){
+        // TODO 멤버 이름이나 이메일이 같으면 예외를 발생시키는데
+        // TODO 예외를 발생시키는 경우 대처도 백엔드가 해야 되나?
+        if(memberByNameEntity.isPresent()){ // 이름이 이미 존재하면 예외 발생
             throw new ApiException(MemberErrorCode.Member_Name_Duplicate);
         }
-        if(memberByEmailEntity!=null){
+        if(memberByEmailEntity.isPresent()){ // 이메일이 이미 존재하면 예외 발생
             throw new ApiException(MemberErrorCode.Member_Email_Duplicate);
         }
     }
