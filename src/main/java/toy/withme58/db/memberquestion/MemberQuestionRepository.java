@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface MemberQuestionRepository extends JpaRepository<MemberQuestionEntity, Long> {
 
-    Optional<MemberQuestionEntity> findByMemberIdAndQuestionId(Long memberId, Long questionId);
+    Optional<MemberQuestionEntity> findFirstByMemberIdAndQuestionId(Long memberId, Long questionId);
 
-    Optional<MemberQuestionEntity> findByCreatedAtAndMemberId(LocalDate now, Long memberId);
+    Optional<MemberQuestionEntity> findFirstByCreatedAtAndMemberId(LocalDate now, Long memberId);
 }

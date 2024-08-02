@@ -2,6 +2,8 @@ package toy.withme58.api.home.business;
 
 import lombok.RequiredArgsConstructor;
 import toy.withme58.api.common.annotation.Business;
+import toy.withme58.api.common.error.ErrorCode;
+import toy.withme58.api.common.exception.ApiException;
 import toy.withme58.api.home.converter.HomeConverter;
 import toy.withme58.api.home.dto.response.*;
 import toy.withme58.api.home.service.HomeService;
@@ -22,7 +24,8 @@ public class HomeBusiness {
 
     public HomeResponse homeResponse(Long memberId) {
         String question = homeService.findQuestion(memberId); //질문내용
-        MemberEntity member = memberRepository.findById(memberId).get(); //멤버 조회
+        MemberEntity member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT)); //멤버 조회
         LocalDateTime createdAt = member.getCreatedAt(); //멤버 가입한 시기
         return homeConverter.homeResponse(question, createdAt);
     }
