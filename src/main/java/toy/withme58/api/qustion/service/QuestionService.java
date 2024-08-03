@@ -26,27 +26,23 @@ public class QuestionService {
     public List<QuestionEntity> findAll() {
         return questionRepository.findAll();
     }
-
-    @Transactional
+    
     public List<AnswerEntity> findQuestionsByReceiverId(Long receiverId) { //이떄 답변이 미등록 된 것만 가져온다.
         return answerRepository.findAllByReceiverId(receiverId).stream()
                 .filter(e -> e.getStatus() == AnswerStatus.UNREGISTERED)
                 .toList();
     }
 
-    @Transactional
     public QuestionEntity findQuestionById(Long questionId) {
         return questionRepository.findFirstByIdAndStatusOrderById(questionId, AnswerStatus.REGISTERED)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
     }
 
-    @Transactional
     public String findQuestionTitle(Long questionId) {
         return questionRepository.findById(questionId)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT)).getTitle();
     }
 
-    @Transactional
     public String findFriendNameBySenderId(Long senderId) {
         return memberRepository.findById(senderId)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT)).getName();
@@ -62,7 +58,6 @@ public class QuestionService {
 //        answerRepository.save(answer);
     }
 
-    @Transactional
     public AnswerEntity findAnswerById(Long answerId) {
         return answerRepository.findById(answerId).orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
     }
