@@ -24,12 +24,12 @@ public class MemberQuestionEntity {
     @Column(nullable = false)
     private LocalDate createdAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "member_id")
     private MemberEntity member;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "question_id")
     private QuestionEntity question; //1~10까지 랜덤돌리고 member_id와 question_id에 해당하는

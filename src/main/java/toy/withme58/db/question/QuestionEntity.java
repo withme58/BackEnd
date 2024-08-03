@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 import toy.withme58.db.memberquestion.MemberQuestionEntity;
 import toy.withme58.db.question.enums.QuestionStatus;
 
@@ -32,6 +33,7 @@ public class QuestionEntity {
     @Enumerated(EnumType.STRING)
     private QuestionStatus status;
 
+    @BatchSize(size = 100)
     @OneToMany(mappedBy = "question")
     private List<MemberQuestionEntity> memberQuestionList = List.of();
 
