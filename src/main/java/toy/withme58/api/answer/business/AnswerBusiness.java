@@ -32,15 +32,15 @@ public class AnswerBusiness {
                 .filter(it -> it.getContent() != null)
                 .map(it -> {
                     var receiverName = memberService.getMember(it.getReceiverId()).getName();
-                    return answerConverter.toResponse(it.getQuestion(), receiverName, it.getCreatedAt());
+                    return answerConverter.toResponse(it, receiverName);
                 }).toList();
 
         return answerResponseList;
     }
 
-    public AnswerInfoResponse getOneByQuestionId(Member member, Long questionId) {
+    public AnswerInfoResponse getOneByQuestionId(Member member, Long answerId) {
 
-        var answerEntity = answerService.getOneBySenderIdAndQuestionId(member.getId(), questionId);
+        var answerEntity = answerService.getOneBySenderIdAndQuestionId(answerId);
 
         var receiverName = memberService.getMember(answerEntity.getReceiverId()).getName();
         var senderName = memberService.getMember(answerEntity.getSenderId()).getName();

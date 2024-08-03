@@ -32,9 +32,9 @@ public class AnswerService {
     }
 
     //단일조회
-    public AnswerEntity getOneBySenderIdAndQuestionId(Long senderId, Long questionId){
+    public AnswerEntity getOneBySenderIdAndQuestionId(Long answerId){
 
-        return answerRepository.findFirstBySenderIdAndQuestionIdAndContentIsNotNullOrderByIdDesc(senderId,questionId)
+        return answerRepository.findFirstByIdAndContentIsNotNullOrderByIdDesc(answerId)
                 .orElseThrow(()->new ApiException(ErrorCode.NULL_POINT));
     }
 

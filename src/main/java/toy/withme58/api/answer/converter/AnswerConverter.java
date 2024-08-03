@@ -13,21 +13,23 @@ import java.util.List;
 @Converter
 public class AnswerConverter {
 
-    public AnswerResponse toResponse(QuestionEntity questionEntity,
-                                     String receiverName,
-                                     LocalDateTime createdAt) {
+    public AnswerResponse toResponse(AnswerEntity answerEntity,
+                                     String receiverName
+    ) {
+        QuestionEntity questionEntity = answerEntity.getQuestion();
+
         return AnswerResponse.builder()
-                .questionId(questionEntity.getId())
+                .questionId(answerEntity.getId())
                 .receiverName(receiverName)
                 .colorCode(questionEntity.getColorCode())
                 .questionContent(questionEntity.getTitle())
-                .createdAt(createdAt)
+                .createdAt(answerEntity.getCreatedAt())
                 .build();
     }
 
     public AnswerInfoResponse toResponse(AnswerEntity answerEntity,
-                                     String receiverName,
-                                     String senderName) {
+                                         String receiverName,
+                                         String senderName) {
         return AnswerInfoResponse.builder()
                 .senderName(senderName)
                 .receiverName(receiverName)
