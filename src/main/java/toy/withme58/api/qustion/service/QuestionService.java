@@ -26,7 +26,7 @@ public class QuestionService {
     public List<QuestionEntity> findAll() {
         return questionRepository.findAll();
     }
-    
+
     public List<AnswerEntity> findQuestionsByReceiverId(Long receiverId) { //이떄 답변이 미등록 된 것만 가져온다.
         return answerRepository.findAllByReceiverId(receiverId).stream()
                 .filter(e -> e.getStatus() == AnswerStatus.UNREGISTERED)
