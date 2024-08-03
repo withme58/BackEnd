@@ -9,6 +9,7 @@ import toy.withme58.api.member.dto.Member;
 import toy.withme58.api.qustion.business.QuestionBusiness;
 import toy.withme58.api.qustion.dto.request.SendingAnswerRequest;
 import toy.withme58.api.qustion.dto.response.MyQuestionResponse;
+import toy.withme58.api.qustion.dto.response.OneQuestionResponse;
 import toy.withme58.api.qustion.dto.response.SendingAnswerResponse;
 
 @RequiredArgsConstructor
@@ -30,5 +31,11 @@ public class QuestionController {
     public Api<SendingAnswerResponse> sendingAnswer(@RequestBody SendingAnswerRequest request) {
         SendingAnswerResponse sendingAnswerResponse = questionBusiness.sendingAnswer(request);
         return Api.OK(sendingAnswerResponse);
+    }
+
+    @GetMapping("/{answerId}")
+    public Api<OneQuestionResponse> oneQuestion(@PathVariable Long answerId) {
+        OneQuestionResponse oneQuestionResponse = questionBusiness.oneQuestionResponse(answerId);
+        return Api.OK(oneQuestionResponse);
     }
 }
