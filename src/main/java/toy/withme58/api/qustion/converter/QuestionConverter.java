@@ -3,6 +3,7 @@ package toy.withme58.api.qustion.converter;
 import toy.withme58.api.common.annotation.Converter;
 import toy.withme58.api.qustion.dto.QuestionsDto;
 import toy.withme58.api.qustion.dto.response.MyQuestionResponse;
+import toy.withme58.api.qustion.dto.response.OneQuestionResponse;
 import toy.withme58.api.qustion.dto.response.SendingAnswerResponse;
 import toy.withme58.db.answer.AnswerEntity;
 import toy.withme58.db.answer.enums.AnswerStatus;
@@ -30,5 +31,12 @@ public class QuestionConverter {
         return SendingAnswerResponse.builder()
                 .question(question).answer(answer).status(AnswerStatus.REGISTERED.getStatus())
                 .build();
+    }
+
+    public OneQuestionResponse oneQuestionResponse(String questionTitle, String senderName) {
+        return OneQuestionResponse.builder()
+                .questionName(questionTitle)
+                .friendName(senderName)
+                .status(QuestionStatus.REGISTERED.getStatus()).build();
     }
 }
