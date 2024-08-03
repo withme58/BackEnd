@@ -56,10 +56,10 @@ public class QuestionService {
     public void updateAnswer(Long answerId, String answerContent) {
         AnswerEntity answer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
-        answer.setAnsweredAt(LocalDateTime.now());
+        answer.setAnsweredAt();
         answer.setContent(answerContent);
         answer.setStatus(AnswerStatus.REGISTERED);
-        answerRepository.save(answer);
+//        answerRepository.save(answer);
     }
 
     @Transactional
