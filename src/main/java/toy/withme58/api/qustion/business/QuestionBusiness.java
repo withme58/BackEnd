@@ -43,6 +43,6 @@ public class QuestionBusiness {
         AnswerEntity answerEntity = questionService.findAnswerById(answerId);
         String questionTitle = answerEntity.getQuestion().getTitle();
         String senderName = questionService.findFriendNameBySenderId(answerEntity.getSenderId());
-        return questionConverter.oneQuestionResponse(questionTitle, senderName);
+        return questionConverter.oneQuestionResponse(questionTitle, senderName, answerEntity);
     }
 }

@@ -17,6 +17,7 @@ public class QuestionConverter {
     public QuestionsDto questionsDto(String questionTitle, String senderName, AnswerEntity question) {
         return QuestionsDto.builder().questionName(questionTitle)
                 .friendName(senderName).friendId(question.getSenderId()).answerId(question.getId())
+                .createdAt(question.getCreatedAt())
                 .build();
     }
 
@@ -33,10 +34,10 @@ public class QuestionConverter {
                 .build();
     }
 
-    public OneQuestionResponse oneQuestionResponse(String questionTitle, String senderName) {
+    public OneQuestionResponse oneQuestionResponse(String questionTitle, String senderName, AnswerEntity answerEntity) {
         return OneQuestionResponse.builder()
                 .questionName(questionTitle)
-                .friendName(senderName)
+                .friendName(senderName).createdAt(answerEntity.getCreatedAt())
                 .status(QuestionStatus.REGISTERED.getStatus()).build();
     }
 }
