@@ -11,5 +11,6 @@ public class OneQuestionResponse {
     private LocalDateTime createdAt;
     private String questionName;
     private String friendName;
+    private Long friendId;
     private String status;
 }

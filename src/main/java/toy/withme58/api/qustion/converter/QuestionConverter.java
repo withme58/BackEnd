@@ -37,7 +37,7 @@ public class QuestionConverter {
     public OneQuestionResponse oneQuestionResponse(String questionTitle, String senderName, AnswerEntity answerEntity) {
         return OneQuestionResponse.builder()
                 .questionName(questionTitle)
-                .friendName(senderName).createdAt(answerEntity.getCreatedAt())
+                .friendName(senderName).createdAt(answerEntity.getCreatedAt()).friendId(answerEntity.getSenderId())
                 .status(QuestionStatus.REGISTERED.getStatus()).build();
     }
 }
