@@ -13,7 +13,7 @@ import toy.withme58.api.qustion.dto.response.OneQuestionResponse;
 import toy.withme58.api.qustion.dto.response.SendingAnswerResponse;
 
 @RequiredArgsConstructor
-@RequestMapping("/question")
+@RequestMapping("api/question")
 @RestController
 public class QuestionController {
 
