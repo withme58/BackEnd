@@ -9,12 +9,11 @@ import toy.withme58.db.question.QuestionEntity;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name ="answer")
+@Table(name = "answer")
 public class AnswerEntity {
 
     @Id
@@ -41,6 +40,18 @@ public class AnswerEntity {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-//    @Column(nullable = false)
+    //    @Column(nullable = false)
     private LocalDateTime answeredAt;
+
+    public void setAnsweredAt() {
+        this.answeredAt = LocalDateTime.now();
+    }
+
+    public void setAnswerContent(String answerContent) {
+        this.content = answerContent;
+    }
+
+    public void setAnswerStatus(AnswerStatus status) {
+        this.status = status;
+    }
 }

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 public class HomeResponse {
-
+    private Long questionId;
     private String question;
     private LocalDateTime createdAt;
     private String status;

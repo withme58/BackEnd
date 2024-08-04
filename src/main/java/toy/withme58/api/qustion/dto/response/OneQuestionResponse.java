@@ -1,4 +1,4 @@
-package toy.withme58.api.qustion.dto;
+package toy.withme58.api.qustion.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 
 @Builder
 @Getter
-public class QuestionsDto {
+public class OneQuestionResponse {
+    private LocalDateTime createdAt;
     private String questionName;
     private String friendName;
     private Long friendId;
-    private Long answerId;
-    private LocalDateTime createdAt;
+    private String status;
 }

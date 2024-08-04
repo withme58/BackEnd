@@ -10,6 +10,7 @@ import toy.withme58.api.home.service.HomeService;
 import toy.withme58.db.answer.AnswerEntity;
 import toy.withme58.db.member.MemberEntity;
 import toy.withme58.db.member.MemberRepository;
+import toy.withme58.db.question.QuestionEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,7 +24,8 @@ public class HomeBusiness {
     private final MemberRepository memberRepository;
 
     public HomeResponse homeResponse(Long memberId) {
-        String question = homeService.findQuestion(memberId); //질문내용
+        QuestionEntity question = homeService.findQuestion(memberId); //질문내용
+//        QuestionEntity questionEntity = homeService.findQuestionId(question);
         MemberEntity member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT)); //멤버 조회
         LocalDateTime createdAt = member.getCreatedAt(); //멤버 가입한 시기

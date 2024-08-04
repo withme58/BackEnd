@@ -6,6 +6,7 @@ import toy.withme58.db.answer.AnswerEntity;
 import toy.withme58.db.answer.enums.AnswerStatus;
 import toy.withme58.db.member.enums.MemberStatus;
 import toy.withme58.db.memberfriend.enums.MemberFriendStatus;
+import toy.withme58.db.question.QuestionEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,9 +14,10 @@ import java.util.List;
 @Converter
 public class HomeConverter {
 
-    public HomeResponse homeResponse(String question, LocalDateTime createdAt) {
+    public HomeResponse homeResponse(QuestionEntity question, LocalDateTime createdAt) {
         return HomeResponse.builder()
-                .question(question)
+                .question(question.getTitle())
+                .questionId(question.getId())
                 .createdAt(createdAt)
                 .status(MemberStatus.REGISTERED.getStatus()).build();
     }

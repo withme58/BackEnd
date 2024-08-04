@@ -37,30 +37,48 @@ public class HomeService {
     private final MemberFriendRepository memberFriendRepository;
     private final AnswerRepository answerRepository;
 
-    public String findQuestion(Long memberId) {
+    public QuestionEntity findQuestion(Long memberId) {
 
-        LocalDate now = LocalDate.now();
+//        LocalDate now = LocalDate.now();
+//
+//        Optional<MemberQuestionEntity> memberQuestionById = memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId);
+//        if (memberQuestionById.isPresent()) {//현재 시간이 db에 존재하면
+//            log.info("질문 이미 받았습니다");
+//            MemberQuestionEntity memberQuestion = memberQuestionById.get();
+//            return memberQuestion.getQuestion();
+//        } else {
+//            Random random = new Random();
+//
+//            List<Long> idxList = IntStream.rangeClosed(1, 10)
+//                    .filter(i -> memberQuestionRepository.findFirstByMemberIdAndQuestionId(memberId, (long) i).isEmpty())
+//                    .mapToObj(Long::valueOf)
+//                    .toList();
+//
+//            int randomIdx = random.nextInt(idxList.size());
+//            Long questionId = idxList.get(randomIdx);
+//
+//            saveData(memberId, questionId);
+//
+//            return questionRepository.findById(questionId).get();
+//        }
+        Random random = new Random();
 
-        Optional<MemberQuestionEntity> memberQuestionById = memberQuestionRepository.findFirstByCreatedAtAndMemberId(now, memberId);
-        if (memberQuestionById.isPresent()) {//현재 시간이 db에 존재하면
-            log.info("질문 이미 받았습니다");
-            MemberQuestionEntity memberQuestion = memberQuestionById.get();
-            return memberQuestion.getQuestion().getTitle();
-        } else {
-            Random random = new Random();
+        List<Long> idxList = IntStream.rangeClosed(1, 10)
+                .filter(i -> memberQuestionRepository.findFirstByMemberIdAndQuestionId(memberId, (long) i).isEmpty())
+                .mapToObj(Long::valueOf)
+                .toList();
 
-            List<Long> idxList = IntStream.rangeClosed(1, 10)
-                    .filter(i -> memberQuestionRepository.findFirstByMemberIdAndQuestionId(memberId, (long) i).isEmpty())
-                    .mapToObj(Long::valueOf)
-                    .toList();
+        int randomIdx = random.nextInt(idxList.size());
+        Long questionId = idxList.get(randomIdx);
 
-            int randomIdx = random.nextInt(idxList.size());
-            Long questionId = idxList.get(randomIdx);
+        saveData(memberId, questionId);
 
-            saveData(memberId, questionId);
+        return questionRepository.findById(questionId).get();
+    }
 
-            return questionRepository.findById(questionId).get().getTitle();
-        }
+    public QuestionEntity findQuestionId(String questionTitle) {
+        return questionRepository.findFirstByTitle(questionTitle)
+                .orElseThrow(() -> new ApiException((ErrorCode.NULL_POINT)));
     }
 
     @Transactional
@@ -94,6 +112,7 @@ public class HomeService {
         return member.getId();
     }
 
+    @Transactional
     public void saveQuestion(AnswerEntity answer) {
         answerRepository.save(answer);
     }

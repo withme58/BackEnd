@@ -11,4 +11,6 @@ public interface QuestionRepository extends JpaRepository<QuestionEntity, Long> 
 
     //select * from questionEntity where id and status = ? order by id desc
     Optional<QuestionEntity> findFirstByIdAndStatusOrderById(Long id, AnswerStatus status);
+
+    Optional<QuestionEntity> findFirstByTitle(String title);
 }
