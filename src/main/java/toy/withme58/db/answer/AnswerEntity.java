@@ -47,11 +47,11 @@ public class AnswerEntity {
         this.answeredAt = LocalDateTime.now();
     }
 
-    public void setContent(String answerContent) {
+    public void setAnswerContent(String answerContent) {
         this.content = answerContent;
     }
 
-    public void setStatus(AnswerStatus status) {
+    public void setAnswerStatus(AnswerStatus status) {
         this.status = status;
     }
 }

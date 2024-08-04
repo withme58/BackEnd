@@ -12,7 +12,6 @@ import toy.withme58.db.member.MemberRepository;
 import toy.withme58.db.question.QuestionEntity;
 import toy.withme58.db.question.QuestionRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -53,8 +52,8 @@ public class QuestionService {
         AnswerEntity answer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
         answer.setAnsweredAt();
-        answer.setContent(answerContent);
-        answer.setStatus(AnswerStatus.REGISTERED);
+        answer.setAnswerContent(answerContent);
+        answer.setAnswerStatus(AnswerStatus.REGISTERED);
 //        answerRepository.save(answer);
     }
 
