@@ -65,7 +65,9 @@ public class MemberBusiness {
 
         var entity = memberService.getMember(userId);
 
-        var response = memberConverter.toMemberResponse(entity);
+        var giveAnswerCount = answerService.getCountByReceiverId(entity.getId());
+
+        var response = memberConverter.toMemberResponse(entity,giveAnswerCount);
         return response;
     }
 
@@ -84,4 +86,6 @@ public class MemberBusiness {
             throw new ApiException(MemberErrorCode.Member_Email_Duplicate);
         }
     }
+
+
 }

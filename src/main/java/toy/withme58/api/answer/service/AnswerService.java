@@ -46,4 +46,8 @@ public class AnswerService {
     public List<AnswerEntity> getAllListBySenderIdAndIsNotNull(Long senderId){
         return answerRepository.findBySenderIdAndContentIsNotNull(senderId);
     }
+
+    public Long getCountByReceiverId(Long receiverId){
+        return answerRepository.countByReceiverIdAndContentIsNotNull(receiverId);
+    }
 }

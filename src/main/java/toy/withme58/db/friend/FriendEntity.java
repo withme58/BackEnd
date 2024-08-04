@@ -3,6 +3,7 @@ package toy.withme58.db.friend;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 import toy.withme58.db.friend.enums.FriendStatus;
 import toy.withme58.db.memberfriend.MemberFriendEntity;
 
@@ -34,6 +35,7 @@ public class FriendEntity {
     @Enumerated(EnumType.STRING)
     private FriendStatus status;
 
+    @BatchSize(size = 100)
     @OneToMany(mappedBy = "friend")
     private List<MemberFriendEntity> memberFriendList = List.of();
 }

@@ -22,16 +22,16 @@ public class MemberFriendEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "friend_id")
+
     private FriendEntity friend;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "member_id")
     private MemberEntity member;
-
 
     private LocalDateTime createdAt;
 
