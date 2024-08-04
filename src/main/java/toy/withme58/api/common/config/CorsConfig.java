@@ -24,7 +24,7 @@ public class CorsConfig {
         config.addAllowedOrigin("https://www.peephole.co.kr");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
-        config.addExposedHeader("authorization-token");
+        config.addExposedHeader("Authorization");
         config.addExposedHeader("refreshToken");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
