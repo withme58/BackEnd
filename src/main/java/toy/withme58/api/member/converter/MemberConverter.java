@@ -27,6 +27,22 @@ public class MemberConverter {
     }
 
 
+    public MemberResponse toMemberResponse(MemberEntity memberEntity, Long giveAnswerCount){
+        return Optional.ofNullable(memberEntity)
+                .map(it->{
+                    return MemberResponse.builder()
+                            .id(memberEntity.getId())
+                            .name(memberEntity.getName())
+                            .email(memberEntity.getEmail())
+                            .createdAt(memberEntity.getCreatedAt())
+                            .status(memberEntity.getStatus())
+                            .giveAnswerCount(giveAnswerCount.intValue())
+                            .build();
+
+                })
+                .orElseThrow(()->new ApiException(ErrorCode.NULL_POINT,"[MemberConverter-toUserResponse()] MemberEntity null "));
+    }
+
     public MemberResponse toMemberResponse(MemberEntity memberEntity){
         return Optional.ofNullable(memberEntity)
                 .map(it->{

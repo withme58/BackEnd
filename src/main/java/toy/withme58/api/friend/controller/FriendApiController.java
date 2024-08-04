@@ -89,6 +89,4 @@ public class FriendApiController {
 
         return Api.OK("친구 삭제 완료");
     }
-
-
 }

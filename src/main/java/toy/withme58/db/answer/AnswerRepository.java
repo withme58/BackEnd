@@ -27,6 +27,8 @@ public interface AnswerRepository extends JpaRepository<AnswerEntity, Long> {
     @Query("select a from AnswerEntity a where a.receiverId = :receiverId and a.content is not null")
     List<AnswerEntity> findByReceiverIdAndContentIsNotNull(@Param("receiverId") Long senderId);
 
+    @Query("select count(a) from AnswerEntity a where a.receiverId = :receiverId and a.content is not null")
+    Long countByReceiverIdAndContentIsNotNull(@Param("receiverId") Long receiverId);
 
 
 }

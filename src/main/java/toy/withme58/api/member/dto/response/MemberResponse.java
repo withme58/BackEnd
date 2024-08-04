@@ -24,4 +24,6 @@ public class MemberResponse {
 
     private MemberStatus status;
 
+    private int giveAnswerCount;
+
 }
