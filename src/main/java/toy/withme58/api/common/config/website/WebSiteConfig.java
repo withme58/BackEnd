@@ -19,7 +19,7 @@ public class WebSiteConfig implements WebMvcConfigurer {
 
 
     private List<String> OPEN_API = List.of(
-            "/api/**"
+            "/open-api/**"
     );
 
     private List<String> DEFAULT_EXCLUDE = List.of(
