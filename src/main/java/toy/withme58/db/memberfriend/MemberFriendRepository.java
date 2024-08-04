@@ -12,7 +12,7 @@ public interface MemberFriendRepository extends JpaRepository<MemberFriendEntity
 
 
 
-    @Query("select mf from MemberFriendEntity mf Join Fetch mf.friend Join Fetch mf.member Where mf.friend.id = :friendId")
+    @Query("select mf from MemberFriendEntity mf Join Fetch mf.friend mff Join Fetch mf.member Where mff.id = :friendId")
     List<MemberFriendEntity> findAllByFriendId(@Param("friendId")Long memberId);
     //생성 조회 삭제
 

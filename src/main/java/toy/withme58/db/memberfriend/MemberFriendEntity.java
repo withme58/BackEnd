@@ -25,7 +25,6 @@ public class MemberFriendEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "friend_id")
-
     private FriendEntity friend;
 
     @ManyToOne(fetch = FetchType.LAZY)
