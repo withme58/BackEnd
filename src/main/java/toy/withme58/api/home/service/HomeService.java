@@ -112,6 +112,7 @@ public class HomeService {
         return member.getId();
     }
 
+    @Transactional
     public void saveQuestion(AnswerEntity answer) {
         answerRepository.save(answer);
     }
