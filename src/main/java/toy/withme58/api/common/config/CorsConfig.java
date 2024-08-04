@@ -20,6 +20,8 @@ public class CorsConfig {
         config.addAllowedOrigin("http://52.78.139.165");
         config.addAllowedOrigin("https://52.78.139.165:8080");
         config.addAllowedOrigin("https://52.78.139.165");
+        config.addAllowedOrigin("https://peephole.co.kr");
+        config.addAllowedOrigin("https://www.peephole.co.kr");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         config.addExposedHeader("Authorization");
