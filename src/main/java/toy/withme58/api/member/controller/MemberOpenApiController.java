@@ -16,7 +16,7 @@ import toy.withme58.api.member.dto.response.MemberResponse;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/open-api")
 public class MemberOpenApiController {
 
     private final MemberBusiness memberBusiness;
