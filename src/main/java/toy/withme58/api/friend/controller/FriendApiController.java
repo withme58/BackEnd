@@ -25,6 +25,7 @@ public class FriendApiController {
             @Parameter(hidden = true)
             @MemberSession Member member
     ) {
+
         var response = friendBusiness.getFriendsByMember(member);
         return Api.OK(response);
     }
@@ -34,6 +35,8 @@ public class FriendApiController {
             @Parameter(hidden = true)
             @MemberSession Member member
     ){
+
+
         var response = friendBusiness.getFriendWaitingByMember(member);
         return Api.OK(response);
     }

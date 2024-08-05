@@ -13,7 +13,7 @@ public interface AnswerRepository extends JpaRepository<AnswerEntity, Long> {
 
     //memberId와 receiverId가 같은 것을 전체 보여주기
     //select * from answer where receiverId = ? order by id desc
-    @Query("select a from AnswerEntity a join fetch a.question aq" +
+    @Query("select a from AnswerEntity a join fetch a.question aq " +
             "where a.senderId = :senderId and a.content is not null " +
             "order by a.id desc")
     List<AnswerEntity> findAllBySenderIdOrderByIdDesc(@Param("senderId")Long receiverId);

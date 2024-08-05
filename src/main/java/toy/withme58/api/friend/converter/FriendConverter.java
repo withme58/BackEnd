@@ -64,6 +64,8 @@ public class FriendConverter {
             MemberEntity memberEntity,
             MemberFriendStatus status
     ){
+        var entity = memberEntity.getEmail();
+
         return FriendResponse.builder()
                 .id(memberEntity.getId())
                 .email(memberEntity.getEmail())
