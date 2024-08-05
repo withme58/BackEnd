@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +39,6 @@ public interface AnswerRepository extends JpaRepository<AnswerEntity, Long> {
     @Query("select count(a) from AnswerEntity a where a.receiverId = :receiverId and a.content is not null")
     Long countByReceiverIdAndContentIsNotNull(@Param("receiverId") Long receiverId);
 
-
+    @Query("select a from AnswerEntity a where a.senderId = :senderId And DATE(a.createdAt) = :date Order By a.id desc")
+    Optional<AnswerEntity> findFirstBySenderIdAndCreatedAtOrderByIdDesc(@Param("senderId")Long senderId,@Param("date") LocalDate date);
 }
