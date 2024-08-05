@@ -7,7 +7,9 @@ import toy.withme58.api.common.exception.ApiException;
 import toy.withme58.db.answer.AnswerEntity;
 import toy.withme58.db.answer.AnswerRepository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +51,10 @@ public class AnswerService {
 
     public Long getCountByReceiverId(Long receiverId){
         return answerRepository.countByReceiverIdAndContentIsNotNull(receiverId);
+    }
+
+    public Optional<AnswerEntity> getOneBySenderIdAndCreatedAt(Long senderId, LocalDate date){
+
+        return answerRepository.findFirstBySenderIdAndCreatedAtOrderByIdDesc(senderId,date);
     }
 }
