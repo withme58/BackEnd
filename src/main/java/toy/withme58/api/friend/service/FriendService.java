@@ -2,6 +2,7 @@ package toy.withme58.api.friend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import toy.withme58.api.common.error.ErrorCode;
 import toy.withme58.api.common.exception.ApiException;
 import toy.withme58.db.friend.FriendEntity;
@@ -33,6 +34,7 @@ public class FriendService {
 
     //********조회***********
     //friend Id 를 받으면 친구 정보를 보여줘요
+
     public FriendEntity searchOne(Long friendId) {
         var friendEntity = friendRepository.findFirstByIdAndStatusOrderByIdDesc(friendId, FriendStatus.REGISTERED);
         return friendEntity.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "해당 유저는 탈퇴했거나 없습니다"));

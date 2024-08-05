@@ -3,6 +3,7 @@ package toy.withme58.api.member.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import toy.withme58.api.common.error.ErrorCode;
 import toy.withme58.api.common.error.MemberErrorCode;
 import toy.withme58.api.common.exception.ApiException;
@@ -46,9 +47,11 @@ public class MemberService {
         ).orElseThrow(()->new ApiException(MemberErrorCode.Member_Not_Found));
     }
 
+    @Transactional
     public MemberEntity getMember(
             Long memberId
     ){
+
         return memberRepository.findFirstByIdAndStatusOrderByIdDesc(memberId, MemberStatus.REGISTERED)
                 .orElseThrow(()-> new ApiException(MemberErrorCode.Member_Not_Found));
     }

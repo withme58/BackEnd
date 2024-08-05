@@ -1,7 +1,10 @@
 package toy.withme58.api.friend.business;
 
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.proxy.HibernateProxy;
+import org.springframework.transaction.annotation.Transactional;
 import toy.withme58.api.common.annotation.Business;
 import toy.withme58.api.common.error.MemberErrorCode;
 import toy.withme58.api.common.exception.ApiException;
@@ -46,18 +49,28 @@ public class FriendBusiness {
     }
 
     //Status == REGISTERED 인 경우
+
+    @Transactional
     public FriendsResponse getFriendsByMember(
             Member member
     ) {
         var memberEntity = memberService.getMember(member.getId());
+
+
+        System.out.println(member.getName());
+
+
         var friendId = memberEntity.getId();
         var friendEntity = friendService.searchOne(friendId);
 
+
         var memberFriendList = friendEntity.getMemberFriendList();
+
 
         var friendResponseList = memberFriendList.stream()
                 .filter(it-> it.getStatus()==MemberFriendStatus.REGISTERED)
                 .map(it->{
+
                     return friendConverter.toResponseByMember(it.getMember(),MemberFriendStatus.REGISTERED);
                 })
                 .toList();
