@@ -49,6 +49,14 @@ dependencies {
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 }
 
+task copyYML(type: Copy){
+    copy {
+        from './back-end-yaml'
+        include "*.yaml"
+        into './common/src/main/resources'
+    }
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
