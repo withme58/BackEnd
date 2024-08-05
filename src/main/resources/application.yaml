@@ -5,19 +5,17 @@ spring:
       format_sql: true
       dialect: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3307/yonombara?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://yonombara.cloyi6mws20s.ap-northeast-2.rds.amazonaws.com:3306/yonombara
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: new_agnes0812
-
+    username: yonombara
+    password: yonombara
 
 token:
   secret:
     key: SpringBootJWTHelperTokenSecretKeyValue123!@#
   access-token:
-    plus-hour: 3
+    plus-hour: 1
   refresh-token:
     plus-hour: 12
-
