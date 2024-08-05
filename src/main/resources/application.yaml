@@ -10,7 +10,7 @@ spring:
     url: jdbc:mysql://localhost:3307/yonombara?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: root
+    password: new_agnes0812
 
 
 token:
