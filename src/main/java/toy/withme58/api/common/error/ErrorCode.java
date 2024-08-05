@@ -14,7 +14,7 @@ public enum ErrorCode implements ErrorCodeIfs{
     SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR.value(),500,"서버 에러"),
 
     NULL_POINT(HttpStatus.INTERNAL_SERVER_ERROR.value(),512,"Null Pointer"),
-
+    MULTI_REQUEST(405,405,"하루 한번만 요청 가능합니다"),
     ;
 
     private final Integer httpStatusCode;
